@@ -679,11 +679,6 @@ public class HelloController {
                     }
                 }
 
-
-                System.out.println(Arrays.toString(tablicaSklejen[0]));
-                System.out.println(Arrays.toString(tablicaSklejen[1]));
-
-
                 //Uporządkowanie tablicy sklejeń start
 
                 List<Integer> labelSort = new ArrayList<Integer>();
@@ -696,7 +691,7 @@ public class HelloController {
                 }
 
                 int ilosc = labelSort.size();
-                
+
                 for(int i = 0; i < ilosc; i++) {
                     for (int j = 0; j < tablicaSklejenRozmiar; j++)
                     {
