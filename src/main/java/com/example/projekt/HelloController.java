@@ -6,7 +6,9 @@ import javafx.scene.image.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javafx.scene.paint.Color;
 
@@ -133,13 +135,14 @@ public class HelloController {
                     }
                 }
 
-                for (int x = 0; x < width; x++) {
-                    for (int y = 0; y < height; y++) {
+                for (int x = 1; x < height-1; x++) {
+                    for (int y = 1; y < width-1; y++) {
                         if (binary[x][y] == 1) {
                             A = labels[x - 1][y - 1];
                             B = labels[x-1][y];
-                            C = labels[x + 1][y - 1];
+                            C = labels[x - 1][y + 1];
                             D = labels[x][y-1];
+
                             if (A == 0 && B == 0 && C == 0 && D == 0) // Nowa etykieta
                             {
                                 L += 1;
@@ -177,7 +180,7 @@ public class HelloController {
                                 // Dwie etykiety w pobliżu start
 
                                 if (A != 0 && B != 0 && C == 0 && D == 0) {
-                                    if (A < B) {
+                                    if (A <= B) {
                                         labels[x][y] = A;
 
                                         //Modyfikacja tablicy sklejeń start
@@ -204,7 +207,7 @@ public class HelloController {
                                 }
 
                                 if (A != 0 && B == 0 && C != 0 && D == 0) {
-                                    if (A < C) {
+                                    if (A <= C) {
                                         labels[x][y] = A;
 
                                         //Modyfikacja tablicy sklejeń start
@@ -232,7 +235,7 @@ public class HelloController {
                                 }
 
                                 if (A != 0 && B == 0 && C == 0 && D != 0) {
-                                    if (A < D) {
+                                    if (A <= D) {
                                         labels[x][y] = A;
 
                                         //Modyfikacja tablicy sklejeń start
@@ -317,7 +320,7 @@ public class HelloController {
                                 }
 
                                 if (A == 0 && B == 0 && C != 0 && D != 0) {
-                                    if (C <= D) {
+                                    if (C < D) {
                                         labels[x][y] = C;
 
                                         //Modyfikacja tablicy sklejeń start
@@ -328,7 +331,6 @@ public class HelloController {
                                             }
                                         }
                                         //Modyfikacja tablicy sklejeń koniec
-
                                     } else {
                                         labels[x][y] = D;
 
@@ -548,7 +550,7 @@ public class HelloController {
 
                                         //Modyfikacja tablicy sklejeń start
                                         for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == C || tablicaSklejen[1][i] == D) {
+                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == D) {
                                                 tablicaSklejen[1][i] = C;
                                                 break;
                                             }
@@ -562,7 +564,7 @@ public class HelloController {
 
                                         //Modyfikacja tablicy sklejeń start
                                         for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == C || tablicaSklejen[1][i] == A) {
+                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == C) {
                                                 tablicaSklejen[1][i] = D;
                                                 break;
                                             }
@@ -665,9 +667,6 @@ public class HelloController {
 
                 //Sklejenie obiektów koniec
 
-                System.out.println(Arrays.toString(tablicaSklejen[0]));
-                System.out.println(Arrays.toString(tablicaSklejen[1]));
-
                 int label;
                 for (int x = 0; x < width; x++) {
                     for (int y = 0; y < height; y++) {
@@ -680,18 +679,49 @@ public class HelloController {
                     }
                 }
 
-                //Uporządkowanie tablicy sklejeń start
-//                for (int i = 1; i < tablicaSklejenRozmiar; i++) {
-//                    if (tablicaSklejen[1][i - 1] != tablicaSklejen[1][i]) {
-//                        for (int j = 1; j < tablicaSklejenRozmiar; j++) {
-//                            if (tablicaSklejen[1][j] == tablicaSklejen[1][i]) {
-//                                tablicaSklejen[1][j] = tablicaSklejen[1][i - 1] + 1;
-//                            }
-//                        }
-//                    }
-//                }
-                //Uporządkowanie tablicy sklejeń koniec
 
+                System.out.println(Arrays.toString(tablicaSklejen[0]));
+                System.out.println(Arrays.toString(tablicaSklejen[1]));
+
+
+                //Uporządkowanie tablicy sklejeń start
+
+                List<Integer> labelSort = new ArrayList<Integer>();
+
+                for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                    if(!labelSort.contains(tablicaSklejen[1][i]) && tablicaSklejen[1][i] != 0)
+                    {
+                        labelSort.add(tablicaSklejen[1][i]);
+                    }
+                }
+
+                int ilosc = labelSort.size();
+                
+                for(int i = 0; i < ilosc; i++) {
+                    for (int j = 0; j < tablicaSklejenRozmiar; j++)
+                    {
+                        if(tablicaSklejen[1][j]==labelSort.get(i))
+                        {
+                            for (int x = 0; x < width; x++) {
+                                for (int y = 0; y < height; y++) {
+                                    if (binary[x][y] == 1) {
+                                        label = labels[x][y];
+                                        if (tablicaSklejen[1][j] == label) {
+                                            labels[x][y] = i+1;
+                                        }
+                                    }
+                                }
+                            }
+                            tablicaSklejen[1][j]=i+1;
+                        }
+                    }
+                }
+
+                System.out.println(Arrays.toString(tablicaSklejen[0]));
+                System.out.println(Arrays.toString(tablicaSklejen[1]));
+
+
+                //Uporządkowanie tablicy sklejeń koniec
 
                 reader2 = image.getPixelReader();
                 dest2 = new WritableImage(width, height);
