@@ -68,8 +68,8 @@ public class HelloController {
                 width = (int) image.getWidth();
                 height = (int) image.getHeight();
 
-                binary = new int[height][width];
-                labels = new int[height][width];
+                binary = new int[width][height];
+                labels = new int[width][height];
                 tablicaSklejenRozmiar = 255;
                 tablicaSklejen = new int[2][tablicaSklejenRozmiar];
                 colour = new String[10];
@@ -114,21 +114,25 @@ public class HelloController {
 //                    System.out.println(Arrays.toString(binary[i]));
 //                }
 
-                int[][] binaryReverse = new int[width][height];
-                int[][] labelsReverse = new int[width][height];
+                int[][] binaryReverse = new int[height][width];
+                int[][] labelsReverse = new int[height][width];
 
-                for(int x = 0; x < width; x++)
+                for(int x = 0; x < height; x++)
                 {
-                    for(int y = 0; y < height; y++)
+                    for(int y = 0; y < width; y++)
                     {
                         binaryReverse[x][y] = binary[y][x];
                         labelsReverse[x][y] = labels[y][x];
                     }
                 }
 
-                for(int x = 0; x < width; x++)
+                binary = new int[height][width];
+                labels = new int[height][width];
+
+
+                for(int x = 0; x < height; x++)
                 {
-                    for(int y = 0; y < height; y++)
+                    for(int y = 0; y < width; y++)
                     {
                         binary[x][y] = binaryReverse[x][y];
                         labels[x][y] = labelsReverse[x][y];
@@ -578,6 +582,27 @@ public class HelloController {
                     }
                 }
 
+//                for(int x = 0; x < width; x++)
+//                {
+//                    for(int y = 0; y < height; y++)
+//                    {
+//                        binaryReverse[x][y] = binary[y][x];
+//                        labelsReverse[x][y] = labels[y][x];
+//                    }
+//                }
+//
+//                for(int x = 0; x < width; x++)
+//                {
+//                    for(int y = 0; y < height; y++)
+//                    {
+//                        binary[x][y] = binaryReverse[x][y];
+//                        labels[x][y] = labelsReverse[x][y];
+//                    }
+//                }
+
+                binaryReverse = new int[width][height];
+                labelsReverse = new int[width][height];
+
                 for(int x = 0; x < width; x++)
                 {
                     for(int y = 0; y < height; y++)
@@ -587,6 +612,10 @@ public class HelloController {
                     }
                 }
 
+                binary = new int[width][height];
+                labels = new int[width][height];
+
+
                 for(int x = 0; x < width; x++)
                 {
                     for(int y = 0; y < height; y++)
@@ -595,6 +624,7 @@ public class HelloController {
                         labels[x][y] = labelsReverse[x][y];
                     }
                 }
+
 
 
                 for (int x = 0; x < width; x++) {
@@ -667,6 +697,10 @@ public class HelloController {
 
                 //Sklejenie obiektów koniec
 
+                System.out.println(Arrays.toString(tablicaSklejen[0]));
+                System.out.println(Arrays.toString(tablicaSklejen[1]));
+
+
                 int label;
                 for (int x = 0; x < width; x++) {
                     for (int y = 0; y < height; y++) {
@@ -714,7 +748,6 @@ public class HelloController {
 
                 System.out.println(Arrays.toString(tablicaSklejen[0]));
                 System.out.println(Arrays.toString(tablicaSklejen[1]));
-
 
                 //Uporządkowanie tablicy sklejeń koniec
 
