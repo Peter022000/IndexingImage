@@ -82,7 +82,7 @@ public class HelloController {
                 colour[6] = "0xBBFF00ff";
                 colour[7] = "0x00BB00ff";
                 colour[8] = "0x00AABBff";
-                colour[9] = "0xAABB00ff";
+                colour[9] = "0xABCDEFff";
 
                 L = 0;
 
@@ -582,24 +582,6 @@ public class HelloController {
                     }
                 }
 
-//                for(int x = 0; x < width; x++)
-//                {
-//                    for(int y = 0; y < height; y++)
-//                    {
-//                        binaryReverse[x][y] = binary[y][x];
-//                        labelsReverse[x][y] = labels[y][x];
-//                    }
-//                }
-//
-//                for(int x = 0; x < width; x++)
-//                {
-//                    for(int y = 0; y < height; y++)
-//                    {
-//                        binary[x][y] = binaryReverse[x][y];
-//                        labels[x][y] = labelsReverse[x][y];
-//                    }
-//                }
-
                 binaryReverse = new int[width][height];
                 labelsReverse = new int[width][height];
 
@@ -696,10 +678,6 @@ public class HelloController {
                 }
 
                 //Sklejenie obiektów koniec
-
-                System.out.println(Arrays.toString(tablicaSklejen[0]));
-                System.out.println(Arrays.toString(tablicaSklejen[1]));
-
 
                 int label;
                 for (int x = 0; x < width; x++) {
