@@ -211,9 +211,6 @@ public class HelloController {
                                                 tablicaSklejen[1][i] = B;
                                                 break;
                                             }
-                                            if(i==2){
-                                                System.out.println("1");
-                                            }
                                         }
                                         //Modyfikacja tablicy sklejeń koniec
 
@@ -230,10 +227,6 @@ public class HelloController {
                                                 tablicaSklejen[1][i] = A;
                                                 break;
                                             }
-                                            if(i==2){
-                                                System.out.println("1");
-                                            }
-
                                         }
                                         //Modyfikacja tablicy sklejeń koniec
 
@@ -246,9 +239,6 @@ public class HelloController {
                                             if (tablicaSklejen[1][i] == A) {
                                                 tablicaSklejen[1][i] = C;
                                                 break;
-                                            }
-                                            if(i==2){
-                                                System.out.println("1");
                                             }
                                         }
                                         //Modyfikacja tablicy sklejeń koniec
