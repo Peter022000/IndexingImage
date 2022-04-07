@@ -687,17 +687,17 @@ public class HelloController {
 
                 //Sklejenie obiektów koniec
 
-                for (int x = 0; x < width; x++) {
-                    for (int y = 0; y < height; y++) {
-                        if (binary[x][y] == 1) {
-                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                if(tablicaSklejen2[1][i] == labels[x][y]){
-                                    labels[x][y] = tablicaSklejen[1][i];
-                                }
-                            }
-                        }
-                    }
-                }
+//                for (int x = 0; x < width; x++) {
+//                    for (int y = 0; y < height; y++) {
+//                        if (binary[x][y] == 1) {
+//                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+//                                if(tablicaSklejen2[1][i] == labels[x][y]){
+//                                    labels[x][y] = tablicaSklejen[1][i];
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
 
                 //Uporządkowanie tablicy sklejeń start
 
@@ -717,15 +717,15 @@ public class HelloController {
                     {
                         if(tablicaSklejen[1][j]==labelSort.get(i))
                         {
-                            for (int x = 0; x < width; x++) {
-                                for (int y = 0; y < height; y++) {
-                                    if (binary[x][y] == 1) {
-                                        if (tablicaSklejen[1][j] == labels[x][y]) {
-                                            labels[x][y] = i+1;
-                                        }
-                                    }
-                                }
-                            }
+//                            for (int x = 0; x < width; x++) {
+//                                for (int y = 0; y < height; y++) {
+//                                    if (binary[x][y] == 1) {
+//                                        if (tablicaSklejen[1][j] == labels[x][y]) {
+//                                            labels[x][y] = i+1;
+//                                        }
+//                                    }
+//                                }
+//                            }
                             tablicaSklejen[1][j]=i+1;
                         }
                     }
@@ -735,6 +735,19 @@ public class HelloController {
                 System.out.println(Arrays.toString(tablicaSklejen[1]));
 
                 //Uporządkowanie tablicy sklejeń koniec
+
+                for (int x = 0; x < width; x++) {
+                    for (int y = 0; y < height; y++) {
+                        if (binary[x][y] == 1) {
+                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                if(tablicaSklejen2[1][i] == labels[x][y]){
+                                    labels[x][y] = tablicaSklejen[1][i];
+                                }
+                            }
+                        }
+                    }
+                }
+
 
                 reader2 = image.getPixelReader();
                 dest2 = new WritableImage(width, height);
