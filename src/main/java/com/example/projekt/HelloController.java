@@ -1,7 +1,15 @@
 package com.example.projekt;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -11,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 
 public class HelloController {
@@ -24,6 +33,12 @@ public class HelloController {
     @FXML
     private ImageView imageView3;
 
+    @FXML
+    private TableView<String[]> table1;
+
+    @FXML
+    private TableView<String[]> table2;
+
     private Image image;
     private int stage;
     private int width;
@@ -36,6 +51,7 @@ public class HelloController {
     private String[] colour;
     private int A, B, C, D;
     private int L;
+    private int numerOfLabels;
     private PixelReader reader;
     private PixelReader reader2;
     private WritableImage dest;
@@ -58,6 +74,11 @@ public class HelloController {
             imageView1.setImage(image);
         }
 
+        table1.setVisible(false);
+        table1.getColumns().clear();
+        table2.setVisible(false);
+        table2.getColumns().clear();
+        numerOfLabels=0;
         stage = 0;
     }
 
@@ -158,6 +179,7 @@ public class HelloController {
                                 //Modyfikacja tablicy sklejeń start
                                 for (int i = 0; i < tablicaSklejenRozmiar; i++) {
                                     if (tablicaSklejen[1][i] == 0) {
+                                        numerOfLabels++;
                                         tablicaSklejen[1][i] = labels[x][y];
                                         tablicaSklejen2[1][i] = labels[x][y];
                                         break;
@@ -666,6 +688,8 @@ public class HelloController {
                     }
                 }
 
+                setTable(table1, tablicaSklejen);
+
                 System.out.println(Arrays.toString(tablicaSklejen[0]));
                 System.out.println(Arrays.toString(tablicaSklejen[1]));
 
@@ -682,25 +706,9 @@ public class HelloController {
                         }
                     }
                 }
-
-
-
                 //Sklejenie obiektów koniec
 
-//                for (int x = 0; x < width; x++) {
-//                    for (int y = 0; y < height; y++) {
-//                        if (binary[x][y] == 1) {
-//                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-//                                if(tablicaSklejen2[1][i] == labels[x][y]){
-//                                    labels[x][y] = tablicaSklejen[1][i];
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-
                 //Uporządkowanie tablicy sklejeń start
-
                 List<Integer> labelSort = new ArrayList<>();
 
                 for (int i = 0; i < tablicaSklejenRozmiar; i++) {
@@ -717,15 +725,6 @@ public class HelloController {
                     {
                         if(tablicaSklejen[1][j]==labelSort.get(i))
                         {
-//                            for (int x = 0; x < width; x++) {
-//                                for (int y = 0; y < height; y++) {
-//                                    if (binary[x][y] == 1) {
-//                                        if (tablicaSklejen[1][j] == labels[x][y]) {
-//                                            labels[x][y] = i+1;
-//                                        }
-//                                    }
-//                                }
-//                            }
                             tablicaSklejen[1][j]=i+1;
                         }
                     }
@@ -733,9 +732,9 @@ public class HelloController {
 
                 System.out.println(Arrays.toString(tablicaSklejen[0]));
                 System.out.println(Arrays.toString(tablicaSklejen[1]));
-
                 //Uporządkowanie tablicy sklejeń koniec
 
+                //Podmienienie etykiet start
                 for (int x = 0; x < width; x++) {
                     for (int y = 0; y < height; y++) {
                         if (binary[x][y] == 1) {
@@ -747,7 +746,9 @@ public class HelloController {
                         }
                     }
                 }
+                //Podmienienie etykiet koniec
 
+                setTable(table2, tablicaSklejen);
 
                 reader2 = image.getPixelReader();
                 dest2 = new WritableImage(width, height);
@@ -812,4 +813,52 @@ public class HelloController {
             }
         }
     }
+
+    private void  setTable(TableView<String[]> table, int[][] dataArray) {
+        table.setVisible(true);
+        String[][] staffArray = new String[dataArray.length][];
+
+        for(int i = 0; i < dataArray.length; i++){
+            staffArray[i] = new String[numerOfLabels];
+            for(int j=0; j<numerOfLabels; j++){
+                staffArray[i][j] = Integer.toString(dataArray[i][j]);
+            }
+        }
+        
+        ObservableList<String[]> data = FXCollections.observableArrayList();
+        data.addAll(Arrays.asList(staffArray));
+        data.remove(0);//remove titles from data
+        for (int i = 0; i < staffArray[0].length; i++) {
+            TableColumn tc = new TableColumn(staffArray[0][i]);
+            final int colNo = i;
+            tc.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> p) {
+                    return new SimpleStringProperty((p.getValue()[colNo]));
+                }
+            });
+            tc.setPrefWidth(90);
+            table.getColumns().add(tc);
+        }
+        table.setItems(data);
+    }
+
+    private Color[] generateColors(int n)
+    {
+        String[] colour = new String[6];
+        colour[0] = "A";
+        colour[1] = "B";
+        colour[2] = "C";
+        colour[3] = "D";
+        colour[4] = "E";
+        colour[5] = "F";
+
+        Color[] cols = new Color[n];
+        for(int i = 0; i < n; i++)
+        {
+
+        }
+        return cols;
+    }
+
 }
