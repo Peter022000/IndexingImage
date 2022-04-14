@@ -133,11 +133,6 @@ public class HelloController {
                     }
                 }
 
-//                for(int i = 0; i < binary.length;i++)
-//                {
-//                    System.out.println(Arrays.toString(binary[i]));
-//                }
-
                 int[][] binaryReverse = new int[height][width];
                 int[][] labelsReverse = new int[height][width];
 
@@ -162,6 +157,8 @@ public class HelloController {
                         labels[x][y] = labelsReverse[x][y];
                     }
                 }
+
+                List<String> done = new ArrayList<String>();;
 
                 for (int x = 1; x < height-1; x++) {
                     for (int y = 1; y < width-1; y++) {
@@ -213,29 +210,31 @@ public class HelloController {
                                     if (A <= B) {
                                         labels[x][y] = A;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B) {
-                                                tablicaSklejen[1][i] = A;
-                                                break;
+                                        if(!done.contains(B + "" + A)) {
+                                            done.add(B + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
                                             }
-                                            if(i==2){
-                                                System.out.println("1");
-                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
                                     } else {
                                         labels[x][y] = B;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A) {
-                                                tablicaSklejen[1][i] = B;
-                                                break;
+                                        if(!done.contains(A + "" + B)) {
+                                            done.add(A + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
-
                                     }
                                 }
 
@@ -243,27 +242,33 @@ public class HelloController {
                                     if (A <= C) {
                                         labels[x][y] = A;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == C) {
-                                                tablicaSklejen[1][i] = A;
-                                                break;
+                                        if(!done.contains(C + "" + A)) {
+                                            done.add(C + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
 
 
                                     } else {
                                         labels[x][y] = C;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A) {
-                                                tablicaSklejen[1][i] = C;
-                                                break;
+                                        if (!done.contains(A + "" + C)) {
+                                            done.add(A + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
                                     }
                                 }
 
@@ -271,28 +276,32 @@ public class HelloController {
                                     if (A <= D) {
                                         labels[x][y] = A;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = A;
-                                                break;
+                                        if(!done.contains(D + "" + A)) {
+                                            done.add(D + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
-
 
                                     } else {
                                         labels[x][y] = D;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A) {
-                                                tablicaSklejen[1][i] = D;
-                                                break;
+                                        if(!done.contains(A + "" + D)) {
+                                            done.add(A + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
-
                                     }
                                 }
 
@@ -300,27 +309,32 @@ public class HelloController {
                                     if (B <= C) {
                                         labels[x][y] = B;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == C) {
-                                                tablicaSklejen[1][i] = B;
-                                                break;
+                                        if(!done.contains(C + "" + B)) {
+                                            done.add(C + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
 
                                     } else {
                                         labels[x][y] = C;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B) {
-                                                tablicaSklejen[1][i] = C;
-                                                break;
+                                        if(!done.contains(B + "" + C)) {
+                                            done.add(B + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
-
                                     }
                                 }
 
@@ -328,27 +342,32 @@ public class HelloController {
                                     if (B <= D) {
                                         labels[x][y] = B;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = B;
-                                                break;
+                                        if(!done.contains(D + "" + B)) {
+                                            done.add(D + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
 
                                     } else {
                                         labels[x][y] = D;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B) {
-                                                tablicaSklejen[1][i] = D;
-                                                break;
+                                        if(!done.contains(B + "" + D)) {
+                                            done.add(B + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
-
                                     }
                                 }
 
@@ -356,25 +375,32 @@ public class HelloController {
                                     if (C < D) {
                                         labels[x][y] = C;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = C;
-                                                break;
+                                        if(!done.contains(D + "" + C)) {
+                                            done.add(D + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
                                     } else {
                                         labels[x][y] = D;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == C) {
-                                                tablicaSklejen[1][i] = D;
-                                                break;
+                                        if(!done.contains(C + "" + D)) {
+                                            done.add(C + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
                                     }
                                 }
 
@@ -384,41 +410,85 @@ public class HelloController {
                                     if (A <= B && A <= C) {
                                         labels[x][y] = A;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == C) {
-                                                tablicaSklejen[1][i] = A;
-                                                break;
+                                        if(!done.contains(B + "" + A)) {
+                                            done.add(B + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(C + "" + A)) {
+                                            done.add(C + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
 
                                     if (B <= A && B <= C) {
                                         labels[x][y] = B;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == C) {
-                                                tablicaSklejen[1][i] = B;
-                                                break;
+                                        if(!done.contains(A + "" + B)) {
+                                            done.add(A + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
 
+                                        if(!done.contains(C + "" + B)) {
+                                            done.add(C + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
 
                                     if (C <= A && C <= B) {
                                         labels[x][y] = C;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == B) {
-                                                tablicaSklejen[1][i] = C;
-                                                break;
+                                        if(!done.contains(A + "" + C)) {
+                                            done.add(A + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(B + "" + C)) {
+                                            done.add(B + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
                                 }
 
@@ -426,41 +496,87 @@ public class HelloController {
                                     if (A <= B && A <= D) {
                                         labels[x][y] = A;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = A;
-                                                break;
+                                        if(!done.contains(B + "" + A)) {
+                                            done.add(B + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(D + "" + A)) {
+                                            done.add(D + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
+
 
                                     }
 
                                     if (B <= A && B <= D) {
                                         labels[x][y] = B;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = B;
-                                                break;
+                                        if(!done.contains(A + "" + B)) {
+                                            done.add(A + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(D + "" + B)) {
+                                            done.add(D + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
 
                                     if (D <= A && D <= B) {
                                         labels[x][y] = D;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == A) {
-                                                tablicaSklejen[1][i] = D;
-                                                break;
+                                        if(!done.contains(B + "" + D)) {
+                                            done.add(B + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(A + "" + D)) {
+                                            done.add(A + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
                                 }
 
@@ -468,40 +584,86 @@ public class HelloController {
                                     if (A <= C && A <= D) {
                                         labels[x][y] = A;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == C || tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = A;
-                                                break;
+                                        if(!done.contains(C + "" + A)) {
+                                            done.add(C + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(D + "" + A)) {
+                                            done.add(D + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
 
                                     if (C <= A && C <= D) {
                                         labels[x][y] = C;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = C;
-                                                break;
+                                        if(!done.contains(A + "" + C)) {
+                                            done.add(A + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(D + "" + C)) {
+                                            done.add(D + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
+
                                     }
 
                                     if (D <= A && D <= C) {
                                         labels[x][y] = D;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == C) {
-                                                tablicaSklejen[1][i] = D;
-                                                break;
+                                        if(!done.contains(A + "" + D)) {
+                                            done.add(A + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(C + "" + D)) {
+                                            done.add(C + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
                                 }
 
@@ -509,40 +671,85 @@ public class HelloController {
                                     if (B <= C && B <= D) {
                                         labels[x][y] = B;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == C || tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = B;
-                                                break;
+                                        if(!done.contains(C + "" + B)) {
+                                            done.add(C + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(D + "" + B)) {
+                                            done.add(D + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
 
                                     if (C <= B && C <= D) {
                                         labels[x][y] = C;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = C;
-                                                break;
+                                        if(!done.contains(B + "" + C)) {
+                                            done.add(B + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(D + "" + C)) {
+                                            done.add(D + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
 
                                     if (D <= B && D <= C) {
                                         labels[x][y] = D;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == C) {
-                                                tablicaSklejen[1][i] = D;
-                                                break;
+                                        if(!done.contains(B + "" + D)) {
+                                            done.add(B + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(C + "" + D)) {
+                                            done.add(C + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
                                 }
 
@@ -553,57 +760,161 @@ public class HelloController {
                                     if (A <= B && A <= C && A <= D) {
                                         labels[x][y] = A;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == C || tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = A;
-                                                break;
+                                        if(!done.contains(B + "" + A)) {
+                                            done.add(B + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+                                        if(!done.contains(C + "" + A)) {
+                                            done.add(C + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
 
-
+                                        if(!done.contains(D + "" + A)) {
+                                            done.add(D + "" + A);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = A;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
 
                                     if (B <= A && B <= C && B <= D) {
                                         labels[x][y] = B;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == C || tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = B;
-                                                break;
+                                        if(!done.contains(A + "" + B)) {
+                                            done.add(A + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
 
+                                        if(!done.contains(C + "" + B)) {
+                                            done.add(C + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
+
+                                        if(!done.contains(D + "" + B)) {
+                                            done.add(D + "" + B);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = B;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
 
                                     if (C <= A && C <= B && C <= D) {
                                         labels[x][y] = C;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == D) {
-                                                tablicaSklejen[1][i] = C;
-                                                break;
+                                        if(!done.contains(A + "" + C)) {
+                                            done.add(A + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(B + "" + C)) {
+                                            done.add(B + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
+
+                                        if(!done.contains(D + "" + C)) {
+                                            done.add(D + "" + C);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == D) {
+                                                    tablicaSklejen[1][i] = C;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
+
 
                                     }
-
                                     if (D <= A && D <= B && D <= C) {
                                         labels[x][y] = D;
 
-                                        //Modyfikacja tablicy sklejeń start
-                                        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-                                            if (tablicaSklejen[1][i] == A || tablicaSklejen[1][i] == B || tablicaSklejen[1][i] == C) {
-                                                tablicaSklejen[1][i] = D;
-                                                break;
+                                        if(!done.contains(A + "" + D)) {
+                                            done.add(A + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == A) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
                                             }
+                                            //Modyfikacja tablicy sklejeń koniec
                                         }
-                                        //Modyfikacja tablicy sklejeń koniec
+
+                                        if(!done.contains(B + "" + D)) {
+                                            done.add(B + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == B) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
+
+                                        if(!done.contains(C + "" + D)) {
+                                            done.add(C + "" + D);
+                                            //Modyfikacja tablicy sklejeń start
+                                            for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                                                if (tablicaSklejen[1][i] == C) {
+                                                    tablicaSklejen[1][i] = D;
+                                                    break;
+                                                }
+                                            }
+                                            //Modyfikacja tablicy sklejeń koniec
+                                        }
                                     }
                                 }
                             }
@@ -635,8 +946,6 @@ public class HelloController {
                         labels[x][y] = labelsReverse[x][y];
                     }
                 }
-
-
 
                 for (int x = 0; x < width; x++) {
                     for (int y = 0; y < height; y++) {
