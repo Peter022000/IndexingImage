@@ -1,5 +1,6 @@
 package com.example.projekt;
 
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -7,13 +8,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,6 +62,80 @@ public class HelloController {
     private PixelWriter writer;
     private PixelWriter writer2;
 
+    @FXML
+    private ComboBox<String> imageMenu;
+
+    @FXML
+    void initialize(){
+        imageMenu.getItems().add("Kształty");
+        imageMenu.getItems().add("Krzywe");
+        imageMenu.getItems().add("Przykład Handel");
+        imageMenu.getItems().add("Logo");
+        imageMenu.getItems().add("Linie");
+        imageMenu.getItems().add("Przykład błędnej indeksacji");
+    }
+
+    @FXML
+    void imageMenuAction(ActionEvent event) throws IOException {
+        int selectedIndex = imageMenu.getSelectionModel().getSelectedIndex();
+        if(selectedIndex == 0) {
+            chooseTestImage(1);
+        } else if(selectedIndex == 1) {
+            chooseTestImage(2);
+        } else if(selectedIndex == 2) {
+            chooseTestImage(3);
+        }else if(selectedIndex == 3) {
+            chooseTestImage(4);
+        }else if(selectedIndex == 4) {
+            chooseTestImage(5);
+        }else if(selectedIndex == 5) {
+            chooseTestImage(6);
+        }
+    }
+
+    @FXML
+    void chooseTestImage(int imageNumber) {
+        imageView1.setImage(null);
+        imageView2.setImage(null);
+        imageView3.setImage(null);
+        switch (imageNumber)
+        {
+            case 1:
+                image = new Image("file:src/main/resources/assets/figure_1.png");
+                imageView1.setImage(image);
+                break;
+            case 2:
+                image = new Image("file:src/main/resources/assets/figure_2.png");
+                imageView1.setImage(image);
+                break;
+            case 3:
+                image = new Image("file:src/main/resources/assets/figure_3.png");
+                imageView1.setImage(image);
+                break;
+            case 4:
+                image = new Image("file:src/main/resources/assets/figure_4.png");
+                imageView1.setImage(image);
+                break;
+            case 5:
+                image = new Image("file:src/main/resources/assets/figure_5.png");
+                imageView1.setImage(image);
+                break;
+            case 6:
+                image = new Image("file:src/main/resources/assets/figure_6.png");
+                imageView1.setImage(image);
+                break;
+            default:
+                System.out.println("Error");
+                break;
+        }
+
+        table1.setVisible(false);
+        table1.getColumns().clear();
+        table2.setVisible(false);
+        table2.getColumns().clear();
+        numerOfLabels=0;
+        stage = 0;
+    }
 
     @FXML
     void choose(ActionEvent event) {
@@ -860,5 +937,12 @@ public class HelloController {
         }
         return cols;
     }
+
+    @FXML
+    void exitGame(ActionEvent event) {
+        Platform.exit();
+    }
+
+
 
 }
