@@ -174,9 +174,3 @@
     -fx-background-color: #750a0e,
                                         linear-gradient(#ef4349, #f37277);
 }
-
-.combo-box-base:focused {
-    -fx-background-color: #bc1016, #ec2127, #f37277, #ef4349;
-    -fx-background-radius: 6.4, 4, 5, 3;
-    -fx-background-insets: -1.4, 0, 1, 2;
-}
