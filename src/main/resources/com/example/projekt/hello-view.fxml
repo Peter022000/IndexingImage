@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1080.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
    <children>
-      <ImageView fx:id="imageView1" fitHeight="300.0" fitWidth="300.0" layoutX="14.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imageView2" fitHeight="300.0" fitWidth="300.0" layoutX="363.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="51.0" layoutY="377.0" mnemonicParsing="false" onAction="#choose" text="Wybierz obraz" />
-      <Button layoutX="179.0" layoutY="377.0" mnemonicParsing="false" onAction="#next" text="Dalej" />
-      <ImageView fx:id="imageView3" fitHeight="300.0" fitWidth="300.0" layoutX="731.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
       <TableView fx:id="table2" layoutX="32.0" layoutY="523.0" prefHeight="93.0" prefWidth="1014.0" visible="false" />
       <TableView fx:id="table1" layoutX="32.0" layoutY="418.0" prefHeight="93.0" prefWidth="1014.0" visible="false" />
+      <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;">
+         <children>
+            <ComboBox fx:id="imageMenu" maxHeight="30.0" minHeight="8.0" onAction="#imageMenuAction" prefHeight="8.0" prefWidth="150.0" promptText="Testowe obrazy">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </ComboBox>
+            <Button mnemonicParsing="false" onAction="#choose" prefWidth="120.0" styleClass="MainButtonStyle" text="Wczytaj obraz">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="Calibri" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="20.0" prefWidth="120.0" styleClass="MainButtonStyle" text="Wyjdź">
+               <font>
+                  <Font name="Calibri" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#next" prefHeight="20.0" prefWidth="120.0" styleClass="MainButtonStyle" text="Dalej">
+               <font>
+                  <Font name="Calibri" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="14.0" layoutY="51.0" prefHeight="325.0" prefWidth="325.0" styleClass="BG_Main">
+         <children>
+            <ImageView fx:id="imageView1" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="378.0" layoutY="51.0" prefHeight="325.0" prefWidth="325.0" styleClass="BG_Main">
+         <children>
+            <ImageView fx:id="imageView2" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="741.0" layoutY="51.0" prefHeight="325.0" prefWidth="325.0" styleClass="BG_Main">
+         <children>
+            <ImageView fx:id="imageView3" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -1,0 +1,176 @@
+/*------------------------------------------------MainStyles------------------------------------------------------------*/
+.root{
+     -fx-background-image:url('../assets/bg_opacity_90.png');
+     -fx-background-size:cover;
+    /*-fx-background-color: rgba(64, 64, 64,0.8);*/
+}
+
+.TextField
+{
+    -fx-border-color:  transparent transparent black transparent;
+    -fx-background-color: transparent;
+    -fx-border-width: 2;
+}
+
+.UnderLinedRed
+{
+    -fx-border-color:  transparent transparent #bc1016 transparent;
+    -fx-background-color: transparent;
+    -fx-border-width: 2;
+    -fx-insets: 4;
+}
+
+.MainButtonStyle
+{
+    -fx-background-color:
+                        linear-gradient(to bottom, #eb141c, #ed2c32);
+    -fx-text-fill: white;
+    -fx-background-radius: 2;
+}
+.MainButtonStyle:hover
+{
+    -fx-background-color:
+                            linear-gradient(to bottom, #ed2c32, #f15b60);
+        -fx-text-fill: white;
+        -fx-background-radius: 2;
+}
+
+.BG_Main
+{
+    -fx-background-color: #2D3439;
+    -fx-border-color: #4A5055;
+    -fx-border-insets: 3;
+}
+
+/*------------------------------------------------Tableview------------------------------------------------------------*/
+.table-view {
+    -fx-background-color: rgba(49,55,57,0.8);
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color:
+            black,
+            linear-gradient(#8d0c11, #bc1016);
+
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
+
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell {
+    -fx-text-background-color: white;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: yellow;
+    -fx-text-background-color: yellow;
+}
+
+.table-row-cell: odd{
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 0;
+    -fx-border-color: #eb141c;
+    -fx-border-style: dotted;
+}
+.table-row-cell: even{
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 0;
+    -fx-border-color: #eb141c;
+    -fx-border-style: dotted;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color: linear-gradient(to bottom, #eb141c, #ed2c32);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color: linear-gradient(to bottom, #eb141c, #ed2c32);
+}
+
+.table-row-cell: highlighted {
+    -fx-background-color: #ffe4b3;
+    -fx-background-radius: 15px;
+}
+
+.table-row-cell:selected {
+   -fx-background-color: rgba(255, 77, 77,0.4);
+   -fx-text-background-color: white;
+}
+.table-view .column-header .label{
+   -fx-text-fill: white;
+}
+
+/*-------------------------------------------------ComboBox-----------------------------------------------------------*/
+.combo-box .list-cell
+{
+    -fx-background: #750a0e,
+                    linear-gradient(#ec2127, #bc1016);
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.combo-box
+{
+    -fx-font-family: "Calibri";
+    -fx-font-size: 15;
+}
+
+.combo-box-popup .list-view
+{
+    -fx-background-color: #750a0e, #750a0e;
+    -fx-background-insets: 0, 1;
+}
+
+.combo-box-popup .list-view .list-cell
+{
+    -fx-padding: 4 0 4 5;
+    -fx-background-color: #750a0e;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
+{
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: #bc1016;
+    -fx-text-fill: white;
+}
+
+.combo-box-base
+{
+    -fx-background-color: #750a0e,
+                            linear-gradient(#ec2127, #bc1016);
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 0;
+}
+
+.combo-box-base:hover
+{
+    -fx-color: yellow;
+    -fx-background-color: #750a0e,
+                                    linear-gradient(#ef4349, #f37277);
+}
+
+.combo-box-base:showing
+{
+    -fx-color: -fx-pressed-base;
+    -fx-background-color: #750a0e,
+                                        linear-gradient(#ef4349, #f37277);
+}

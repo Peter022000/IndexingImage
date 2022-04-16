@@ -1,5 +1,6 @@
 package com.example.projekt;
 
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -7,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -14,6 +16,7 @@ import javafx.scene.image.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +42,9 @@ public class HelloController {
     @FXML
     private TableView<String[]> table2;
 
+    @FXML
+    private ComboBox<String> imageMenu;
+
     private Image image;
     private int stage;
     private int width;
@@ -59,6 +65,85 @@ public class HelloController {
     private PixelWriter writer;
     private PixelWriter writer2;
 
+
+    @FXML
+    void initialize(){
+        imageMenu.getItems().add("Kształty");
+        imageMenu.getItems().add("Krzywe");
+        imageMenu.getItems().add("Przykład Handel");
+        imageMenu.getItems().add("Logo");
+        imageMenu.getItems().add("Linie");
+        imageMenu.getItems().add("Przykład 1");
+        imageMenu.getItems().add("Przykład 2");
+    }
+
+    @FXML
+    void imageMenuAction(ActionEvent event) throws IOException {
+        int selectedIndex = imageMenu.getSelectionModel().getSelectedIndex();
+        if(selectedIndex == 0) {
+            chooseTestImage(1);
+        } else if(selectedIndex == 1) {
+            chooseTestImage(2);
+        } else if(selectedIndex == 2) {
+            chooseTestImage(3);
+        }else if(selectedIndex == 3) {
+            chooseTestImage(4);
+        }else if(selectedIndex == 4) {
+            chooseTestImage(5);
+        }else if(selectedIndex == 5) {
+            chooseTestImage(6);
+        }else if(selectedIndex == 6) {
+            chooseTestImage(7);
+        }
+    }
+
+    @FXML
+    void chooseTestImage(int imageNumber) {
+        imageView1.setImage(null);
+        imageView2.setImage(null);
+        imageView3.setImage(null);
+        switch (imageNumber)
+        {
+            case 1:
+                image = new Image("file:src/main/resources/assets/figure_1.png");
+                imageView1.setImage(image);
+                break;
+            case 2:
+                image = new Image("file:src/main/resources/assets/figure_2.png");
+                imageView1.setImage(image);
+                break;
+            case 3:
+                image = new Image("file:src/main/resources/assets/figure_3.png");
+                imageView1.setImage(image);
+                break;
+            case 4:
+                image = new Image("file:src/main/resources/assets/figure_4.png");
+                imageView1.setImage(image);
+                break;
+            case 5:
+                image = new Image("file:src/main/resources/assets/figure_5.png");
+                imageView1.setImage(image);
+                break;
+            case 6:
+                image = new Image("file:src/main/resources/assets/figure_6.png");
+                imageView1.setImage(image);
+                break;
+            case 7:
+                image = new Image("file:src/main/resources/assets/figure_7.png");
+                imageView1.setImage(image);
+                break;
+            default:
+                System.out.println("Error");
+                break;
+        }
+
+        table1.setVisible(false);
+        table1.getColumns().clear();
+        table2.setVisible(false);
+        table2.getColumns().clear();
+        numerOfLabels=0;
+        stage = 0;
+    }
 
     @FXML
     void choose(ActionEvent event) {
@@ -95,7 +180,7 @@ public class HelloController {
                 tablicaSklejenRozmiar = 255;
                 tablicaSklejen = new int[2][tablicaSklejenRozmiar];
                 tablicaSklejen2 = new int[2][tablicaSklejenRozmiar];
-                colour = new String[10];
+                colour = new String[31];
                 colour[0] = "0xFF0000ff";
                 colour[1] = "0x00FF00ff";
                 colour[2] = "0x0000FFff";
@@ -106,6 +191,29 @@ public class HelloController {
                 colour[7] = "0x00BB00ff";
                 colour[8] = "0x00AABBff";
                 colour[9] = "0xABCDEFff";
+
+                colour[10] = "0xCC6699ff";
+                colour[11] = "0xCC9966ff";
+                colour[12] = "0x66ccb3ff";
+                colour[13] = "0x55ccb3ff";
+                colour[14] = "0x667fccff";
+                colour[15] = "0x6666ccff";
+                colour[16] = "0x7f66ccff";
+                colour[17] = "0x9966ccff";
+                colour[18] = "0xb366ccff";
+                colour[19] = "0xcc66ccff";
+                colour[20] = "0xcc6699ff";
+
+                colour[21] = "0xcc6666ff";
+                colour[22] = "0x3366ffff";
+                colour[23] = "0x426ef0ff";
+                colour[24] = "0xcc33ffff";
+                colour[25] = "0xff3366ff";
+                colour[26] = "0x804000ff";
+                colour[27] = "0xfa9938ff";
+                colour[28] = "0x331a00ff";
+                colour[29] = "0x33ffffff";
+                colour[30] = "0x33ff99ff";
 
                 L = 0;
 
@@ -684,6 +792,90 @@ public class HelloController {
                                 Color c = Color.web(colour[9]);
                                 writer.setColor(x, y, c);
                             }
+                            if (labels[x][y] == 11) {
+                                Color c = Color.web(colour[10]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 12) {
+                                Color c = Color.web(colour[11]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 13) {
+                                Color c = Color.web(colour[12]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 14) {
+                                Color c = Color.web(colour[13]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 15) {
+                                Color c = Color.web(colour[14]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 16) {
+                                Color c = Color.web(colour[15]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 17) {
+                                Color c = Color.web(colour[16]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 18) {
+                                Color c = Color.web(colour[17]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 19) {
+                                Color c = Color.web(colour[18]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 20) {
+                                Color c = Color.web(colour[19]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 21) {
+                                Color c = Color.web(colour[20]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 22) {
+                                Color c = Color.web(colour[21]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 23) {
+                                Color c = Color.web(colour[22]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 24) {
+                                Color c = Color.web(colour[23]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 25) {
+                                Color c = Color.web(colour[24]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 26) {
+                                Color c = Color.web(colour[25]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 27) {
+                                Color c = Color.web(colour[26]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 28) {
+                                Color c = Color.web(colour[27]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 29) {
+                                Color c = Color.web(colour[28]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 30) {
+                                Color c = Color.web(colour[29]);
+                                writer.setColor(x, y, c);
+                            }
+                        }
+                        else if(binary[x][y] == 0) {
+                            Color c = Color.web("0xffffffff");
+                            writer.setColor(x, y, c);
                         }
                     }
                 }
@@ -800,16 +992,96 @@ public class HelloController {
                                 Color c = Color.web(colour[9]);
                                 writer2.setColor(x, y, c);
                             }
-                        } else if(binary[x][y] == 0)
-                        {
+                            if (labels[x][y] == 11) {
+                                Color c = Color.web(colour[10]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 12) {
+                                Color c = Color.web(colour[11]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 13) {
+                                Color c = Color.web(colour[12]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 14) {
+                                Color c = Color.web(colour[13]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 15) {
+                                Color c = Color.web(colour[14]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 16) {
+                                Color c = Color.web(colour[15]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 17) {
+                                Color c = Color.web(colour[16]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 18) {
+                                Color c = Color.web(colour[17]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 19) {
+                                Color c = Color.web(colour[18]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 20) {
+                                Color c = Color.web(colour[19]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 21) {
+                                Color c = Color.web(colour[20]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 22) {
+                                Color c = Color.web(colour[21]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 23) {
+                                Color c = Color.web(colour[22]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 24) {
+                                Color c = Color.web(colour[23]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 25) {
+                                Color c = Color.web(colour[24]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 26) {
+                                Color c = Color.web(colour[25]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 27) {
+                                Color c = Color.web(colour[26]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 28) {
+                                Color c = Color.web(colour[27]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 29) {
+                                Color c = Color.web(colour[28]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 30) {
+                                Color c = Color.web(colour[29]);
+                                writer2.setColor(x, y, c);
+                            }
+                        }
+                        else if(binary[x][y] == 0) {
                             Color c = Color.web("0xffffffff");
                             writer2.setColor(x, y, c);
                         }
                     }
-
-                    imageView3.setImage(dest2);
-                    stage = -1;
                 }
+
+                imageView3.setImage(dest2);
+                stage = -1;
             }
         }
     }
@@ -861,4 +1133,8 @@ public class HelloController {
         return cols;
     }
 
+    @FXML
+    void exitGame(ActionEvent event) {
+        Platform.exit();
+    }
 }
