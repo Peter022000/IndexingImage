@@ -62,7 +62,7 @@ public class HelloController {
     private PixelWriter writer;
     private PixelWriter writer2;
 
-//test
+//test2
     @FXML
     private ComboBox<String> imageMenu;
 
