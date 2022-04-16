@@ -20,6 +20,7 @@ public class HelloApplication extends Application {
         stage.getIcons().add(icon);
         stage.setTitle("Indeksacja");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

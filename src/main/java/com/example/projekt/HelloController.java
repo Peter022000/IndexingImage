@@ -73,7 +73,8 @@ public class HelloController {
         imageMenu.getItems().add("Przykład Handel");
         imageMenu.getItems().add("Logo");
         imageMenu.getItems().add("Linie");
-        imageMenu.getItems().add("Przykład błędnej indeksacji");
+        imageMenu.getItems().add("Przykład 1");
+        imageMenu.getItems().add("Przykład 2");
     }
 
     @FXML
@@ -91,6 +92,8 @@ public class HelloController {
             chooseTestImage(5);
         }else if(selectedIndex == 5) {
             chooseTestImage(6);
+        }else if(selectedIndex == 6) {
+            chooseTestImage(7);
         }
     }
 
@@ -123,6 +126,10 @@ public class HelloController {
                 break;
             case 6:
                 image = new Image("file:src/main/resources/assets/figure_6.png");
+                imageView1.setImage(image);
+                break;
+            case 7:
+                image = new Image("file:src/main/resources/assets/figure_7.png");
                 imageView1.setImage(image);
                 break;
             default:
@@ -173,7 +180,7 @@ public class HelloController {
                 tablicaSklejenRozmiar = 255;
                 tablicaSklejen = new int[2][tablicaSklejenRozmiar];
                 tablicaSklejen2 = new int[2][tablicaSklejenRozmiar];
-                colour = new String[10];
+                colour = new String[31];
                 colour[0] = "0xFF0000ff";
                 colour[1] = "0x00FF00ff";
                 colour[2] = "0x0000FFff";
@@ -184,6 +191,29 @@ public class HelloController {
                 colour[7] = "0x00BB00ff";
                 colour[8] = "0x00AABBff";
                 colour[9] = "0xABCDEFff";
+
+                colour[10] = "0xCC6699ff";
+                colour[11] = "0xCC9966ff";
+                colour[12] = "0x66ccb3ff";
+                colour[13] = "0x55ccb3ff";
+                colour[14] = "0x667fccff";
+                colour[15] = "0x6666ccff";
+                colour[16] = "0x7f66ccff";
+                colour[17] = "0x9966ccff";
+                colour[18] = "0xb366ccff";
+                colour[19] = "0xcc66ccff";
+                colour[20] = "0xcc6699ff";
+
+                colour[21] = "0xcc6666ff";
+                colour[22] = "0x3366ffff";
+                colour[23] = "0x426ef0ff";
+                colour[24] = "0xcc33ffff";
+                colour[25] = "0xff3366ff";
+                colour[26] = "0x804000ff";
+                colour[27] = "0xfa9938ff";
+                colour[28] = "0x331a00ff";
+                colour[29] = "0x33ffffff";
+                colour[30] = "0x33ff99ff";
 
                 L = 0;
 
@@ -762,6 +792,86 @@ public class HelloController {
                                 Color c = Color.web(colour[9]);
                                 writer.setColor(x, y, c);
                             }
+                            if (labels[x][y] == 11) {
+                                Color c = Color.web(colour[10]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 12) {
+                                Color c = Color.web(colour[11]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 13) {
+                                Color c = Color.web(colour[12]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 14) {
+                                Color c = Color.web(colour[13]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 15) {
+                                Color c = Color.web(colour[14]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 16) {
+                                Color c = Color.web(colour[15]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 17) {
+                                Color c = Color.web(colour[16]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 18) {
+                                Color c = Color.web(colour[17]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 19) {
+                                Color c = Color.web(colour[18]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 20) {
+                                Color c = Color.web(colour[19]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 21) {
+                                Color c = Color.web(colour[20]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 22) {
+                                Color c = Color.web(colour[21]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 23) {
+                                Color c = Color.web(colour[22]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 24) {
+                                Color c = Color.web(colour[23]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 25) {
+                                Color c = Color.web(colour[24]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 26) {
+                                Color c = Color.web(colour[25]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 27) {
+                                Color c = Color.web(colour[26]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 28) {
+                                Color c = Color.web(colour[27]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 29) {
+                                Color c = Color.web(colour[28]);
+                                writer.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 30) {
+                                Color c = Color.web(colour[29]);
+                                writer.setColor(x, y, c);
+                            }
                         }
                     }
                 }
@@ -876,6 +986,86 @@ public class HelloController {
                             }
                             if (labels[x][y] == 10) {
                                 Color c = Color.web(colour[9]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 11) {
+                                Color c = Color.web(colour[10]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 12) {
+                                Color c = Color.web(colour[11]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 13) {
+                                Color c = Color.web(colour[12]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 14) {
+                                Color c = Color.web(colour[13]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 15) {
+                                Color c = Color.web(colour[14]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 16) {
+                                Color c = Color.web(colour[15]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 17) {
+                                Color c = Color.web(colour[18]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 18) {
+                                Color c = Color.web(colour[17]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 19) {
+                                Color c = Color.web(colour[18]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 20) {
+                                Color c = Color.web(colour[19]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 21) {
+                                Color c = Color.web(colour[20]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 22) {
+                                Color c = Color.web(colour[21]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 23) {
+                                Color c = Color.web(colour[22]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 24) {
+                                Color c = Color.web(colour[23]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 25) {
+                                Color c = Color.web(colour[24]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 26) {
+                                Color c = Color.web(colour[25]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 27) {
+                                Color c = Color.web(colour[26]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 28) {
+                                Color c = Color.web(colour[27]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 29) {
+                                Color c = Color.web(colour[28]);
+                                writer2.setColor(x, y, c);
+                            }
+                            if (labels[x][y] == 30) {
+                                Color c = Color.web(colour[29]);
                                 writer2.setColor(x, y, c);
                             }
                         } else if(binary[x][y] == 0)
