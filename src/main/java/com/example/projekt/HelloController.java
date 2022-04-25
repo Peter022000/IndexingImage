@@ -8,9 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.*;
 import javafx.stage.FileChooser;
@@ -63,17 +61,33 @@ public class HelloController {
     private PixelWriter writer2;
 
     @FXML
+    private Button exitLabel;
+
+    @FXML
+    private Button nextLabel;
+
+    @FXML
+    private Label titleLabel;
+
+    @FXML
     private ComboBox<String> imageMenu;
+    @FXML
+    private ComboBox<String> languageMenu;
 
     @FXML
     void initialize(){
-        imageMenu.getItems().add("Kształty");
-        imageMenu.getItems().add("Krzywe");
-        imageMenu.getItems().add("Przykład Handel");
+        imageMenu.getItems().add("Shapes");
+        imageMenu.getItems().add("Curves");
+        imageMenu.getItems().add("Handel example");
         imageMenu.getItems().add("Logo");
-        imageMenu.getItems().add("Linie");
-        imageMenu.getItems().add("Przykład 1");
-        imageMenu.getItems().add("Przykład 2");
+        imageMenu.getItems().add("Lines");
+        imageMenu.getItems().add("Example 1");
+        imageMenu.getItems().add("Example 2");
+        imageMenu.getItems().add("Load image");
+
+        languageMenu.getItems().add("English");
+        languageMenu.getItems().add("Polish");
+        //Metoda która wczyta używany ostatnio język z pliku zamiast na sztywno
     }
 
     @FXML
@@ -93,6 +107,61 @@ public class HelloController {
             chooseTestImage(6);
         }else if(selectedIndex == 6) {
             chooseTestImage(7);
+        }
+        else if(selectedIndex == 7) {
+            choose();
+        }
+    }
+
+    @FXML
+    void languageMenuAction(ActionEvent event) throws IOException {
+        int selectedIndex = languageMenu.getSelectionModel().getSelectedIndex();
+        if(selectedIndex == 0)
+        {
+            System.out.println("Ang");
+            exitLabel.setText("Exit");
+            titleLabel.setText("Two pass connected-component labeling");
+            nextLabel.setText("Next iteration");
+
+            //Rzuca wyjątkiem po zclearowaniu!
+            imageMenu.getItems().clear();
+            imageMenu.setValue("Test images");
+            imageMenu.getItems().add("Shapes");
+            imageMenu.getItems().add("Curves");
+            imageMenu.getItems().add("Handel example");
+            imageMenu.getItems().add("Logo");
+            imageMenu.getItems().add("Lines");
+            imageMenu.getItems().add("Example 1");
+            imageMenu.getItems().add("Example 2");
+            imageMenu.getItems().add("Load image");
+
+            languageMenu.getItems().clear();
+            languageMenu.setValue("Language");
+            languageMenu.getItems().add("English");
+            languageMenu.getItems().add("Polish");
+        }
+        else if(selectedIndex == 1)
+        {
+            System.out.println("Pl");
+            exitLabel.setText("Wyjdź");
+            titleLabel.setText("Indeksacja Dwuprzebiegowa");
+            nextLabel.setText("Następna iteracja");
+
+            imageMenu.getItems().clear();
+            imageMenu.setValue("Testowe obrazy");
+            imageMenu.getItems().add("Kształty");
+            imageMenu.getItems().add("Krzywe");
+            imageMenu.getItems().add("Przykład Handel");
+            imageMenu.getItems().add("Logo");
+            imageMenu.getItems().add("Linie");
+            imageMenu.getItems().add("Przykład 1");
+            imageMenu.getItems().add("Przykład 2");
+            imageMenu.getItems().add("Wczytaj obraz");
+
+            languageMenu.getItems().clear();
+            languageMenu.setValue("Język");
+            languageMenu.getItems().add("Angielski");
+            languageMenu.getItems().add("Polski");
         }
     }
 
@@ -145,7 +214,7 @@ public class HelloController {
     }
 
     @FXML
-    void choose(ActionEvent event) {
+    void choose() {
         imageView1.setImage(null);
         imageView2.setImage(null);
         imageView3.setImage(null);
