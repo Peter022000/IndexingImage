@@ -70,29 +70,55 @@ public class HelloController {
     private Label titleLabel;
 
     @FXML
-    private ComboBox<String> imageMenu;
+    private ComboBox<String> imageMenuEN;
     @FXML
-    private ComboBox<String> languageMenu;
+    private ComboBox<String> imageMenuPL;
+    @FXML
+    private ComboBox<String> languageMenuPLAction;
+    @FXML
+    private ComboBox<String> languageMenuENAction;
+
+    @FXML
+    private Label titleLabel1;
+    @FXML
+    private Label titleLabel2;
+    @FXML
+    private Label titleLabel3;
 
     @FXML
     void initialize(){
-        imageMenu.getItems().add("Shapes");
-        imageMenu.getItems().add("Curves");
-        imageMenu.getItems().add("Handel example");
-        imageMenu.getItems().add("Logo");
-        imageMenu.getItems().add("Lines");
-        imageMenu.getItems().add("Example 1");
-        imageMenu.getItems().add("Example 2");
-        imageMenu.getItems().add("Load image");
+        imageMenuEN.getItems().add("Shapes");
+        imageMenuEN.getItems().add("Curves");
+        imageMenuEN.getItems().add("Handel example");
+        imageMenuEN.getItems().add("Logo");
+        imageMenuEN.getItems().add("Lines");
+        imageMenuEN.getItems().add("Example 1");
+        imageMenuEN.getItems().add("Example 2");
+        imageMenuEN.getItems().add("Load image");
 
-        languageMenu.getItems().add("English");
-        languageMenu.getItems().add("Polish");
-        //Metoda która wczyta używany ostatnio język z pliku zamiast na sztywno
+        imageMenuPL.getItems().add("Kształty");
+        imageMenuPL.getItems().add("Krzywe");
+        imageMenuPL.getItems().add("Przykład Handel");
+        imageMenuPL.getItems().add("Logo");
+        imageMenuPL.getItems().add("Linie");
+        imageMenuPL.getItems().add("Przykład 1");
+        imageMenuPL.getItems().add("Przykład 2");
+        imageMenuPL.getItems().add("Wczytaj obraz");
+
+        languageMenuENAction.getItems().add("English");
+        languageMenuENAction.getItems().add("Polski");
+//
+//        languageMenuPLAction.getItems().add("Angielski");
+//        languageMenuPLAction.getItems().add("Polski");
+
+        //TODO: domyślny język zapisany przez kogoś np w pliku pobierac i ifem ustawiać
+        languageMenuPLAction.setVisible(false);
+        imageMenuPL.setVisible(false);
     }
 
     @FXML
-    void imageMenuAction(ActionEvent event) throws IOException {
-        int selectedIndex = imageMenu.getSelectionModel().getSelectedIndex();
+    void imageMenuENAction(ActionEvent event) throws IOException {
+        int selectedIndex = imageMenuEN.getSelectionModel().getSelectedIndex();
         if(selectedIndex == 0) {
             chooseTestImage(1);
         } else if(selectedIndex == 1) {
@@ -114,56 +140,102 @@ public class HelloController {
     }
 
     @FXML
+    void imageMenuPLAction(ActionEvent event) throws IOException {
+        int selectedIndex = imageMenuPL.getSelectionModel().getSelectedIndex();
+        if(selectedIndex == 0) {
+            chooseTestImage(1);
+        } else if(selectedIndex == 1) {
+            chooseTestImage(2);
+        } else if(selectedIndex == 2) {
+            chooseTestImage(3);
+        }else if(selectedIndex == 3) {
+            chooseTestImage(4);
+        }else if(selectedIndex == 4) {
+            chooseTestImage(5);
+        }else if(selectedIndex == 5) {
+            chooseTestImage(6);
+        }else if(selectedIndex == 6) {
+            chooseTestImage(7);
+        }
+        else if(selectedIndex == 7) {
+            choose();
+        }
+    }
+
+
+    @FXML
     void languageMenuAction(ActionEvent event) throws IOException {
-        int selectedIndex = languageMenu.getSelectionModel().getSelectedIndex();
-        if(selectedIndex == 0)
+        String languageName = languageMenuENAction.getSelectionModel().getSelectedItem();
+        System.out.println("menuEn"+languageName);
+        if(languageName.equals("English"))
         {
-            System.out.println("Ang");
             exitLabel.setText("Exit");
             titleLabel.setText("Two pass connected-component labeling");
             nextLabel.setText("Next iteration");
+            titleLabel1.setText("Input image");
+            titleLabel2.setText("Stage 1");
+            titleLabel3.setText("Stage 2");
 
-            //Rzuca wyjątkiem po zclearowaniu!
-            imageMenu.getItems().clear();
-            imageMenu.setValue("Test images");
-            imageMenu.getItems().add("Shapes");
-            imageMenu.getItems().add("Curves");
-            imageMenu.getItems().add("Handel example");
-            imageMenu.getItems().add("Logo");
-            imageMenu.getItems().add("Lines");
-            imageMenu.getItems().add("Example 1");
-            imageMenu.getItems().add("Example 2");
-            imageMenu.getItems().add("Load image");
-
-            languageMenu.getItems().clear();
-            languageMenu.setValue("Language");
-            languageMenu.getItems().add("English");
-            languageMenu.getItems().add("Polish");
+            imageMenuEN.setVisible(true);
+            imageMenuPL.setVisible(false);
+//            languageMenuPLAction.setVisible(false);
+//            languageMenuENAction.setVisible(true);
         }
-        else if(selectedIndex == 1)
+        else if(languageName.equals("Polski"))
         {
-            System.out.println("Pl");
             exitLabel.setText("Wyjdź");
             titleLabel.setText("Indeksacja Dwuprzebiegowa");
             nextLabel.setText("Następna iteracja");
+            titleLabel1.setText("Obraz wejściowy");
+            titleLabel2.setText("Etap 1");
+            titleLabel3.setText("Etap 2");
+            imageMenuEN.setVisible(false);
+            imageMenuPL.setVisible(true);
 
-            imageMenu.getItems().clear();
-            imageMenu.setValue("Testowe obrazy");
-            imageMenu.getItems().add("Kształty");
-            imageMenu.getItems().add("Krzywe");
-            imageMenu.getItems().add("Przykład Handel");
-            imageMenu.getItems().add("Logo");
-            imageMenu.getItems().add("Linie");
-            imageMenu.getItems().add("Przykład 1");
-            imageMenu.getItems().add("Przykład 2");
-            imageMenu.getItems().add("Wczytaj obraz");
-
-            languageMenu.getItems().clear();
-            languageMenu.setValue("Język");
-            languageMenu.getItems().add("Angielski");
-            languageMenu.getItems().add("Polski");
+//            languageMenuPLAction.setVisible(true);
+//            imageMenuPL.setVisible(true);
+//            languageMenuENAction.setVisible(false);
+//            imageMenuEN.setVisible(false);
         }
     }
+
+//    @FXML
+//    void languageMenuPLAction(ActionEvent event) throws IOException {
+//        String languageName = languageMenuENAction.getSelectionModel().getSelectedItem();
+//        System.out.println("menuEn"+languageName);
+//        if(languageName.equals("Angielski"))
+//        {
+//            System.out.println("menuPl w equals.Angielski"+languageName);
+//            System.out.println("Ang menu pl");
+//            exitLabel.setText("Exit");
+//            titleLabel.setText("Two pass connected-component labeling");
+//            nextLabel.setText("Next iteration");
+//            titleLabel1.setText("Input image");
+//            titleLabel2.setText("Stage 1");
+//            titleLabel3.setText("Stage 2");
+//
+//            languageMenuPLAction.setVisible(false);
+//            imageMenuPL.setVisible(false);
+//            languageMenuENAction.setVisible(true);
+//            imageMenuEN.setVisible(true);
+//        }
+//        else if(languageName.equals("Polski"))
+//        {
+//            System.out.println("menuPl w equals.Polski"+languageName);
+//            System.out.println("Pl menupl");
+//            exitLabel.setText("Wyjdź");
+//            titleLabel.setText("Indeksacja Dwuprzebiegowa");
+//            nextLabel.setText("Następna iteracja");
+//            titleLabel1.setText("Obraz wejściowy");
+//            titleLabel2.setText("Etap 1");
+//            titleLabel3.setText("Etap 2");
+//
+//            languageMenuPLAction.setVisible(true);
+//            imageMenuPL.setVisible(true);
+//            languageMenuENAction.setVisible(false);
+//            imageMenuEN.setVisible(false);
+//        }
+//    }
 
     @FXML
     void chooseTestImage(int imageNumber) {
