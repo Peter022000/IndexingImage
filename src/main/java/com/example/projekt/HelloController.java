@@ -279,6 +279,7 @@ public class HelloController {
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     void tablicaSklejenEtapPierwszy(){
         width = (int) image.getWidth();
         height = (int) image.getHeight();
@@ -1499,9 +1500,9 @@ public class HelloController {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    int grafRozmiar = 255;
-    int[][] graf = new int[grafRozmiar][grafRozmiar];
-    int[][] graf2 = new int[grafRozmiar][grafRozmiar];
+    int grafRozmiar;
+    int[][] graf;
+    int[][] graf2;
 
     int root(int Arr[ ],int i)
     {
@@ -1536,7 +1537,7 @@ public class HelloController {
         binary = new int[width][height];
         labels = new int[width][height];
 
-        int grafRozmiar = 255;
+        grafRozmiar = 1024;
         graf = new int[2][grafRozmiar];
         graf2 = new int[2][grafRozmiar];
 
