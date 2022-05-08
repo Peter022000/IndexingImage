@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1080.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1080.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
    <children>
       <TableView fx:id="table2" layoutX="32.0" layoutY="523.0" prefHeight="93.0" prefWidth="1014.0" visible="false" />
       <TableView fx:id="table1" layoutX="32.0" layoutY="418.0" prefHeight="93.0" prefWidth="1014.0" visible="false" />
@@ -35,6 +35,16 @@
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#next" prefHeight="20.0" prefWidth="120.0" styleClass="MainButtonStyle" text="Dalej">
+               <font>
+                  <Font name="Calibri" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="tablicaSklejenButton" mnemonicParsing="false" onAction="#tablicaSklejen" prefHeight="20.0" prefWidth="120.0" styleClass="MainButtonStyle" text="Tablica sklejeń">
+               <font>
+                  <Font name="Calibri" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="grafButton" mnemonicParsing="false" onAction="#graf" prefHeight="20.0" prefWidth="120.0" styleClass="MainButtonStyle" text="Graf">
                <font>
                   <Font name="Calibri" size="15.0" />
                </font>
