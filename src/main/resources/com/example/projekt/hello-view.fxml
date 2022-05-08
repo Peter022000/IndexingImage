@@ -87,7 +87,7 @@
             <Insets top="20.0" />
          </VBox.margin>
       </HBox>
-      <Label fx:id="titleLabel11" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="First stage" textFill="WHITE">
+      <Label fx:id="firstStage" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="First stage" textFill="WHITE">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
@@ -96,7 +96,7 @@
          </VBox.margin>
       </Label>
       <TableView fx:id="table1" prefHeight="93.0" prefWidth="1014.0" visible="false" />
-      <Label fx:id="titleLabel111" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Second stage" textFill="WHITE">
+      <Label fx:id="secondStage" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Second stage" textFill="WHITE">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>

@@ -84,6 +84,10 @@ public class HelloController {
     private Label titleLabel2;
     @FXML
     private Label titleLabel3;
+    @FXML
+    private Label firstStage;
+    @FXML
+    private Label secondStage;
 
     @FXML
     void initialize(){
@@ -175,6 +179,8 @@ public class HelloController {
             titleLabel1.setText("Input image");
             titleLabel2.setText("Stage 1");
             titleLabel3.setText("Stage 2");
+            firstStage.setText("First stage");
+            secondStage.setText("Second stage");
 
             imageMenuEN.setVisible(true);
             imageMenuPL.setVisible(false);
@@ -189,6 +195,8 @@ public class HelloController {
             titleLabel1.setText("Obraz wejściowy");
             titleLabel2.setText("Etap 1");
             titleLabel3.setText("Etap 2");
+            firstStage.setText("Pierwszy etap");
+            secondStage.setText("Drugi etap");
             imageMenuEN.setVisible(false);
             imageMenuPL.setVisible(true);
 
@@ -1537,6 +1545,7 @@ public class HelloController {
 
     private void  setTable(TableView<String[]> table, int[][] dataArray) {
         table.setVisible(true);
+        firstStage.setVisible(true);
         String[][] staffArray = new String[dataArray.length][];
 
         for(int i = 0; i < dataArray.length; i++){
