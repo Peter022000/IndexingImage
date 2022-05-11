@@ -22,8 +22,9 @@
 
 .MainButtonStyle
 {
-    -fx-background-color:
-                        linear-gradient(to bottom, #eb141c, #ed2c32);
+
+    -fx-background-color: #750a0e,
+                                                    linear-gradient(#ec2127, #bc1016);
     -fx-text-fill: white;
     -fx-background-radius: 2;
 }
