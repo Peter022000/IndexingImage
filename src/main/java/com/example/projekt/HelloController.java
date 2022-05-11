@@ -7,18 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
@@ -42,10 +42,61 @@ public class HelloController {
     private TableView<String[]> table2;
 
     @FXML
+    private Button exitLabel;
+
+    @FXML
+    private Button nextLabel;
+
+    @FXML
+    private ComboBox<String> imageMenuEN;
+
+    @FXML
+    private ComboBox<String> imageMenuPL;
+
+    @FXML
+    private ComboBox<String> languageMenuPLAction;
+
+    @FXML
+    private ComboBox<String> languageMenuENAction;
+
+    @FXML
+    private Label titleLabel;
+
+    @FXML
+    private Label titleLabel1;
+
+    @FXML
+    private Label titleLabel2;
+
+    @FXML
+    private Label titleLabel3;
+
+    @FXML
+    private Label firstStage;
+
+    @FXML
+    private Label secondStage;
+
+    @FXML
     private Button grafButton;
 
     @FXML
     private Button tablicaSklejenButton;
+
+    @FXML
+    private ComboBox<String> imageMenu;
+
+    @FXML
+    private Button directoryButton;
+
+    @FXML
+    private Button fileButton;
+
+    @FXML
+    private Label methodSelected;
+
+    @FXML
+    private Label methodTitle;
 
     private Image image;
     private int stage;
@@ -56,7 +107,8 @@ public class HelloController {
     private int tablicaSklejenRozmiar;
     private int[][] tablicaSklejen;
     private int[][] tablicaSklejen2;
-    private String[] colour;
+    private List<String> colour;
+    //private String[] colour;
     private int A, B, C, D;
     private int L;
     private int numerOfLabels;
@@ -67,96 +119,56 @@ public class HelloController {
     private PixelWriter writer;
     private PixelWriter writer2;
     private int method;
-
-    @FXML
-    private ComboBox<String> imageMenu;
+    private String defaultDirectory;
+    private String languageName;
+    private int directorySet;
 
     @FXML
     void initialize(){
-        imageMenu.getItems().add("Kształty");
-        imageMenu.getItems().add("Krzywe");
-        imageMenu.getItems().add("Przykład Handel");
-        imageMenu.getItems().add("Logo");
-        imageMenu.getItems().add("Linie");
-        imageMenu.getItems().add("Przykład 1");
-        imageMenu.getItems().add("Przykład 2");
+
+        languageMenuENAction.getItems().add("English");
+        languageMenuENAction.getItems().add("Polski");
+
+        languageMenuPLAction.getItems().add("Angielski");
+        languageMenuPLAction.getItems().add("Polski");
+
+        languageName = "English";
+
+        //TODO: domyślny język zapisany przez kogoś np w pliku pobierac i ifem ustawiać
+        languageMenuPLAction.setVisible(false);
         method = 0;
+        stage = -1;
+        directorySet = 0;
+
+        firstStage.setVisible(false);
+        firstStage.setText("Graph");
+        secondStage.setVisible(false);
     }
 
     @FXML
-    void imageMenuAction(ActionEvent event) throws IOException {
-        int selectedIndex = imageMenu.getSelectionModel().getSelectedIndex();
-        if(selectedIndex == 0) {
-            chooseTestImage(1);
-        } else if(selectedIndex == 1) {
-            chooseTestImage(2);
-        } else if(selectedIndex == 2) {
-            chooseTestImage(3);
-        }else if(selectedIndex == 3) {
-            chooseTestImage(4);
-        }else if(selectedIndex == 4) {
-            chooseTestImage(5);
-        }else if(selectedIndex == 5) {
-            chooseTestImage(6);
-        }else if(selectedIndex == 6) {
-            chooseTestImage(7);
+    void chooseDirectory(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(new Stage());
+
+        if(selectedDirectory == null){
+            //No Directory selected
+        }else{
+            defaultDirectory = selectedDirectory.getAbsolutePath();
+            directorySet = 1;
         }
     }
 
     @FXML
-    void chooseTestImage(int imageNumber) {
-        imageView1.setImage(null);
-        imageView2.setImage(null);
-        imageView3.setImage(null);
-        switch (imageNumber)
-        {
-            case 1:
-                image = new Image("file:src/main/resources/assets/figure_1.png");
-                imageView1.setImage(image);
-                break;
-            case 2:
-                image = new Image("file:src/main/resources/assets/figure_2.png");
-                imageView1.setImage(image);
-                break;
-            case 3:
-                image = new Image("file:src/main/resources/assets/figure_3.png");
-                imageView1.setImage(image);
-                break;
-            case 4:
-                image = new Image("file:src/main/resources/assets/figure_4.png");
-                imageView1.setImage(image);
-                break;
-            case 5:
-                image = new Image("file:src/main/resources/assets/figure_5.png");
-                imageView1.setImage(image);
-                break;
-            case 6:
-                image = new Image("file:src/main/resources/assets/figure_6.png");
-                imageView1.setImage(image);
-                break;
-            case 7:
-                image = new Image("file:src/main/resources/assets/figure_7.png");
-                imageView1.setImage(image);
-                break;
-            default:
-                System.out.println("Error");
-                break;
-        }
-
-        table1.setVisible(false);
-        table1.getColumns().clear();
-        table2.setVisible(false);
-        table2.getColumns().clear();
-        numerOfLabels=0;
-        stage = 0;
-    }
-
-    @FXML
-    void choose(ActionEvent event) {
+    void chooseFile(ActionEvent event) {
         imageView1.setImage(null);
         imageView2.setImage(null);
         imageView3.setImage(null);
         FileChooser chooser = new FileChooser();
+        if(directorySet == 1)
+        {
+            String intialDirectory = Paths.get(defaultDirectory).toAbsolutePath().normalize().toString();
+            chooser.setInitialDirectory(new File(intialDirectory));
+        }
         chooser.setTitle("Open File");
         File file = chooser.showOpenDialog(new Stage());
         if (file != null) {
@@ -171,11 +183,140 @@ public class HelloController {
         table2.getColumns().clear();
         numerOfLabels=0;
         stage = 0;
+        firstStage.setVisible(false);
+        secondStage.setVisible(false);
+        tablicaSklejenButton.setDisable(false);
+        grafButton.setDisable(false);
+    }
+
+    @FXML
+    void languageMenuAction(ActionEvent event) throws IOException {
+        languageName = languageMenuENAction.getSelectionModel().getSelectedItem();
+        if(languageName.equals("English"))
+        {
+            exitLabel.setText("Exit");
+            titleLabel.setText("Two pass connected-component labeling");
+            nextLabel.setText("Next iteration");
+            titleLabel1.setText("Input image");
+            titleLabel2.setText("Stage 1");
+            titleLabel3.setText("Stage 2");
+            if(method == 0){
+                firstStage.setText("Graph");
+            } else {
+                firstStage.setText("First stage");
+            }
+            secondStage.setText("Second stage");
+            directoryButton.setText("Choose default directory");
+            fileButton.setText("Choose file");
+            methodTitle.setText("Selected method");
+            tablicaSklejenButton.setText("Equivalence table");
+            grafButton.setText("Graph");
+            if(method == 0) {
+                methodSelected.setText("Graph");
+            } else {
+                methodSelected.setText("Equivalence table");
+            }
+
+            //imageMenuEN.setVisible(true);
+            //imageMenuPL.setVisible(false);
+        }
+        else if(languageName.equals("Polski"))
+        {
+            exitLabel.setText("Wyjdź");
+            titleLabel.setText("Indeksacja Dwuprzebiegowa");
+            nextLabel.setText("Następna iteracja");
+            titleLabel1.setText("Obraz wejściowy");
+            titleLabel2.setText("Etap 1");
+            titleLabel3.setText("Etap 2");
+            if(method == 0){
+                firstStage.setText("Graf");
+            } else {
+                firstStage.setText("Pierwszy etap");
+            }
+            secondStage.setText("Drugi etap");
+            directoryButton.setText("Wybierz folder domyślny");
+            fileButton.setText("Wybierz plik");
+            methodTitle.setText("Wybrana metoda");
+            tablicaSklejenButton.setText("Tablica sklejeń");
+            grafButton.setText("Graf");
+            if(method == 0) {
+                methodSelected.setText("Graf");
+            } else {
+                methodSelected.setText("Tablica sklejeń");
+            }
+
+
+            //imageMenuEN.setVisible(false);
+            //imageMenuPL.setVisible(true);
+        }
+    }
+
+    @FXML
+    void tablicaSklejen(ActionEvent event) {
+        if(method != 1) {
+            method = 1;
+
+            if(languageName.equals("English"))
+            {
+                methodSelected.setText("Equivalence table");
+                firstStage.setText("First stage");
+            }
+            else if(languageName.equals("Polski"))
+            {
+                firstStage.setText("Pierwszy etap");
+                methodSelected.setText("Tablica sklejeń");
+            }
+
+            if(stage != 0) {
+                //imageView1.setImage(null);
+                imageView2.setImage(null);
+                imageView3.setImage(null);
+                table1.setVisible(false);
+                table1.getColumns().clear();
+                table2.setVisible(false);
+                table2.getColumns().clear();
+                firstStage.setVisible(false);
+                secondStage.setVisible(false);
+                numerOfLabels = 0;
+                stage = 0;
+            }
+        }
+    }
+
+    @FXML
+    void graf(ActionEvent event) {
+        if(method != 0) {
+            method = 0;
+
+            if(languageName.equals("English"))
+            {
+                methodSelected.setText("Graph");
+                firstStage.setText("Graph");
+            }
+            else if(languageName.equals("Polski"))
+            {
+                methodSelected.setText("Graf");
+                firstStage.setText("Graf");
+            }
+
+            if(stage != 0) {
+                //imageView1.setImage(null);
+                imageView2.setImage(null);
+                imageView3.setImage(null);
+                table1.setVisible(false);
+                table1.getColumns().clear();
+                table2.setVisible(false);
+                table2.getColumns().clear();
+                numerOfLabels = 0;
+                firstStage.setVisible(false);
+                secondStage.setVisible(false);
+                stage = 0;
+            }
+        }
     }
 
     @FXML
     void next(ActionEvent event) {
-        System.out.println("Etap: " + (stage+1));
         if (stage != -1) {
             if (stage == 0) {
 
@@ -185,9 +326,10 @@ public class HelloController {
                 if(method == 0)
                 {
                     grafEtapPierwszy();
-
+                    firstStage.setVisible(true);
                 }
                 else {
+                    firstStage.setVisible(true);
                     tablicaSklejenEtapPierwszy();
                 }
                 stage++;
@@ -195,9 +337,9 @@ public class HelloController {
                 if(method == 0)
                 {
                     grafEtapDrugi();
-
                 }
                 else {
+                    secondStage.setVisible(true);
                     tablicaSklejenEtapDrugi();
                 }
 
@@ -243,38 +385,52 @@ public class HelloController {
         Platform.exit();
     }
 
-    @FXML
-    void tablicaSklejen(ActionEvent event) {
-        if(method != 1) {
-            method = 1;
-            if(stage != 0) {
-                imageView1.setImage(null);
-                imageView2.setImage(null);
-                imageView3.setImage(null);
-                table1.setVisible(false);
-                table1.getColumns().clear();
-                table2.setVisible(false);
-                table2.getColumns().clear();
-                numerOfLabels = 0;
-                stage = 0;
-            }
-        }
-    }
+    void generateColours(){
+        colour = new ArrayList<String>();
 
-    @FXML
-    void graf(ActionEvent event) {
-        if(method != 0) {
-            method = 0;
-            if(stage != 0) {
-                imageView1.setImage(null);
-                imageView2.setImage(null);
-                imageView3.setImage(null);
-                table1.setVisible(false);
-                table1.getColumns().clear();
-                table2.setVisible(false);
-                table2.getColumns().clear();
-                numerOfLabels = 0;
-                stage = 0;
+        for(int i = 0; i < numerOfLabels; i++)
+        {
+            if(i < 31)
+            {
+                colour.add("0xFF0000ff");
+                colour.add("0x00FF00ff");
+                colour.add("0x0000FFff");
+                colour.add("0xAA0000ff");
+                colour.add("0x0AAAA0ff");
+                colour.add("0xAA00AAff");
+                colour.add("0xBBFF00ff");
+                colour.add("0x00BB00ff");
+                colour.add("0x00AABBff");
+                colour.add("0xABCDEFff");
+                colour.add("0xCC6699ff");
+                colour.add("0xCC9966ff");
+                colour.add("0x66ccb3ff");
+                colour.add("0x55ccb3ff");
+                colour.add("0x667fccff");
+                colour.add("0x6666ccff");
+                colour.add("0x7f66ccff");
+                colour.add("0x9966ccff");
+                colour.add("0xb366ccff");
+                colour.add("0xcc66ccff");
+                colour.add("0xcc6699ff");
+                colour.add("0xcc6666ff");
+                colour.add("0x3366ffff");
+                colour.add("0x426ef0ff");
+                colour.add("0xcc33ffff");
+                colour.add("0xff3366ff");
+                colour.add("0x804000ff");
+                colour.add("0xfa9938ff");
+                colour.add("0x331a00ff");
+                colour.add("0x33ffffff");
+                colour.add("0x33ff99ff");
+            } else {
+                Random obj = new Random();
+                int rand_num = obj.nextInt(0xffffff + 1);
+                String colorCode = String.format("#%06x", rand_num);
+
+                if (!colour.contains(colorCode)) {
+                    colour.add(colorCode);
+                }
             }
         }
     }
@@ -285,43 +441,9 @@ public class HelloController {
 
         binary = new int[width][height];
         labels = new int[width][height];
-        tablicaSklejenRozmiar = 255;
+        tablicaSklejenRozmiar = 1500;
         tablicaSklejen = new int[2][tablicaSklejenRozmiar];
         tablicaSklejen2 = new int[2][tablicaSklejenRozmiar];
-        colour = new String[31];
-        colour[0] = "0xFF0000ff";
-        colour[1] = "0x00FF00ff";
-        colour[2] = "0x0000FFff";
-        colour[3] = "0xAA0000ff";
-        colour[4] = "0x0AAAA0ff";
-        colour[5] = "0xAA00AAff";
-        colour[6] = "0xBBFF00ff";
-        colour[7] = "0x00BB00ff";
-        colour[8] = "0x00AABBff";
-        colour[9] = "0xABCDEFff";
-
-        colour[10] = "0xCC6699ff";
-        colour[11] = "0xCC9966ff";
-        colour[12] = "0x66ccb3ff";
-        colour[13] = "0x55ccb3ff";
-        colour[14] = "0x667fccff";
-        colour[15] = "0x6666ccff";
-        colour[16] = "0x7f66ccff";
-        colour[17] = "0x9966ccff";
-        colour[18] = "0xb366ccff";
-        colour[19] = "0xcc66ccff";
-        colour[20] = "0xcc6699ff";
-
-        colour[21] = "0xcc6666ff";
-        colour[22] = "0x3366ffff";
-        colour[23] = "0x426ef0ff";
-        colour[24] = "0xcc33ffff";
-        colour[25] = "0xff3366ff";
-        colour[26] = "0x804000ff";
-        colour[27] = "0xfa9938ff";
-        colour[28] = "0x331a00ff";
-        colour[29] = "0x33ffffff";
-        colour[30] = "0x33ff99ff";
 
         L = 0;
 
@@ -338,9 +460,18 @@ public class HelloController {
             for (int y = 0; y < height; y++) {
                 labels[x][y] = 0;
                 if (reader.getColor(x, y).toString().equals("0x000000ff")) {
-                    Color c = new Color(0, 0, 0, reader.getColor(x, y).getOpacity());
-                    writer.setColor(x, y, c);
-                    binary[x][y] = 1;
+                    if(x == 0 || y == 0 || x == width-1 || y == height-1)
+                    {
+                        Color c = new Color(1, 1, 1, reader.getColor(x, y).getOpacity());
+                        writer.setColor(x, y, c);
+                        binary[x][y] = 0;
+                    }
+                    else
+                    {
+                        Color c = new Color(0, 0, 0, reader.getColor(x, y).getOpacity());
+                        writer.setColor(x, y, c);
+                        binary[x][y] = 1;
+                    }
                 } else if (reader.getColor(x, y).toString().equals("0xffffffff")) {
                     Color c = new Color(1, 1, 1, reader.getColor(x, y).getOpacity());
                     writer.setColor(x, y, c);
@@ -1163,137 +1294,19 @@ public class HelloController {
             }
         }
 
+        generateColours();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
+                Color c;
                 if (binary[x][y] == 1) {
-                    if (labels[x][y] == 1) {
-                        Color c = Color.web(colour[0]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 2) {
-                        Color c = Color.web(colour[1]);
-                        writer.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 3) {
-                        Color c = Color.web(colour[2]);
-                        writer.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 4) {
-                        Color c = Color.web(colour[3]);
-                        writer.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 5) {
-                        Color c = Color.web(colour[4]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 6) {
-                        Color c = Color.web(colour[5]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 7) {
-                        Color c = Color.web(colour[6]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 8) {
-                        Color c = Color.web(colour[7]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 9) {
-                        Color c = Color.web(colour[8]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 10) {
-                        Color c = Color.web(colour[9]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 11) {
-                        Color c = Color.web(colour[10]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 12) {
-                        Color c = Color.web(colour[11]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 13) {
-                        Color c = Color.web(colour[12]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 14) {
-                        Color c = Color.web(colour[13]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 15) {
-                        Color c = Color.web(colour[14]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 16) {
-                        Color c = Color.web(colour[15]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 17) {
-                        Color c = Color.web(colour[16]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 18) {
-                        Color c = Color.web(colour[17]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 19) {
-                        Color c = Color.web(colour[18]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 20) {
-                        Color c = Color.web(colour[19]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 21) {
-                        Color c = Color.web(colour[20]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 22) {
-                        Color c = Color.web(colour[21]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 23) {
-                        Color c = Color.web(colour[22]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 24) {
-                        Color c = Color.web(colour[23]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 25) {
-                        Color c = Color.web(colour[24]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 26) {
-                        Color c = Color.web(colour[25]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 27) {
-                        Color c = Color.web(colour[26]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 28) {
-                        Color c = Color.web(colour[27]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 29) {
-                        Color c = Color.web(colour[28]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 30) {
-                        Color c = Color.web(colour[29]);
-                        writer.setColor(x, y, c);
-                    }
-                } else if(binary[x][y] == 0)
-                {
-                    Color c = Color.web("0xffffffff");
-                    writer.setColor(x, y, c);
+                    c = Color.web(colour.get(labels[x][y] - 1));
                 }
+                else
+                {
+                    c = Color.web("0xffffffff");
+                }
+                writer.setColor(x, y, c);
+
             }
         }
 
@@ -1362,135 +1375,16 @@ public class HelloController {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
+                Color c;
                 if (binary[x][y] == 1) {
-                    if (labels[x][y] == 1) {
-                        Color c = Color.web(colour[0]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 2) {
-                        Color c = Color.web(colour[1]);
-                        writer2.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 3) {
-                        Color c = Color.web(colour[2]);
-                        writer2.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 4) {
-                        Color c = Color.web(colour[3]);
-                        writer2.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 5) {
-                        Color c = Color.web(colour[4]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 6) {
-                        Color c = Color.web(colour[5]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 7) {
-                        Color c = Color.web(colour[6]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 8) {
-                        Color c = Color.web(colour[7]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 9) {
-                        Color c = Color.web(colour[8]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 10) {
-                        Color c = Color.web(colour[9]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 11) {
-                        Color c = Color.web(colour[10]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 12) {
-                        Color c = Color.web(colour[11]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 13) {
-                        Color c = Color.web(colour[12]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 14) {
-                        Color c = Color.web(colour[13]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 15) {
-                        Color c = Color.web(colour[14]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 16) {
-                        Color c = Color.web(colour[15]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 17) {
-                        Color c = Color.web(colour[18]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 18) {
-                        Color c = Color.web(colour[17]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 19) {
-                        Color c = Color.web(colour[18]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 20) {
-                        Color c = Color.web(colour[19]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 21) {
-                        Color c = Color.web(colour[20]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 22) {
-                        Color c = Color.web(colour[21]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 23) {
-                        Color c = Color.web(colour[22]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 24) {
-                        Color c = Color.web(colour[23]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 25) {
-                        Color c = Color.web(colour[24]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 26) {
-                        Color c = Color.web(colour[25]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 27) {
-                        Color c = Color.web(colour[26]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 28) {
-                        Color c = Color.web(colour[27]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 29) {
-                        Color c = Color.web(colour[28]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 30) {
-                        Color c = Color.web(colour[29]);
-                        writer2.setColor(x, y, c);
-                    }
-                } else if(binary[x][y] == 0)
-                {
-                    Color c = Color.web("0xffffffff");
-                    writer2.setColor(x, y, c);
+                    c = Color.web(colour.get(labels[x][y] - 1));
                 }
+                else
+                {
+                    c = Color.web("0xffffffff");
+                }
+                writer2.setColor(x, y, c);
+
             }
         }
         imageView3.setImage(dest2);
@@ -1499,7 +1393,7 @@ public class HelloController {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    int grafRozmiar = 255;
+    int grafRozmiar;
     int[][] graf = new int[grafRozmiar][grafRozmiar];
     int[][] graf2 = new int[grafRozmiar][grafRozmiar];
 
@@ -1536,44 +1430,9 @@ public class HelloController {
         binary = new int[width][height];
         labels = new int[width][height];
 
-        int grafRozmiar = 255;
+        grafRozmiar = 1500;
         graf = new int[2][grafRozmiar];
         graf2 = new int[2][grafRozmiar];
-
-        colour = new String[31];
-        colour[0] = "0xFF0000ff";
-        colour[1] = "0x00FF00ff";
-        colour[2] = "0x0000FFff";
-        colour[3] = "0xAA0000ff";
-        colour[4] = "0x0AAAA0ff";
-        colour[5] = "0xAA00AAff";
-        colour[6] = "0xBBFF00ff";
-        colour[7] = "0x00BB00ff";
-        colour[8] = "0x00AABBff";
-        colour[9] = "0xABCDEFff";
-
-        colour[10] = "0xCC6699ff";
-        colour[11] = "0xCC9966ff";
-        colour[12] = "0x66ccb3ff";
-        colour[13] = "0x55ccb3ff";
-        colour[14] = "0x667fccff";
-        colour[15] = "0x6666ccff";
-        colour[16] = "0x7f66ccff";
-        colour[17] = "0x9966ccff";
-        colour[18] = "0xb366ccff";
-        colour[19] = "0xcc66ccff";
-        colour[20] = "0xcc6699ff";
-
-        colour[21] = "0xcc6666ff";
-        colour[22] = "0x3366ffff";
-        colour[23] = "0x426ef0ff";
-        colour[24] = "0xcc33ffff";
-        colour[25] = "0xff3366ff";
-        colour[26] = "0x804000ff";
-        colour[27] = "0xfa9938ff";
-        colour[28] = "0x331a00ff";
-        colour[29] = "0x33ffffff";
-        colour[30] = "0x33ff99ff";
 
         L = 0;
 
@@ -1590,9 +1449,18 @@ public class HelloController {
             for (int y = 0; y < height; y++) {
                 labels[x][y] = 0;
                 if (reader.getColor(x, y).toString().equals("0x000000ff")) {
-                    Color c = new Color(0, 0, 0, reader.getColor(x, y).getOpacity());
-                    writer.setColor(x, y, c);
-                    binary[x][y] = 1;
+                    if(x == 0 || y == 0 || x == width-1 || y == height-1)
+                    {
+                        Color c = new Color(1, 1, 1, reader.getColor(x, y).getOpacity());
+                        writer.setColor(x, y, c);
+                        binary[x][y] = 0;
+                    }
+                    else
+                    {
+                        Color c = new Color(0, 0, 0, reader.getColor(x, y).getOpacity());
+                        writer.setColor(x, y, c);
+                        binary[x][y] = 1;
+                    }
                 } else if (reader.getColor(x, y).toString().equals("0xffffffff")) {
                     Color c = new Color(1, 1, 1, reader.getColor(x, y).getOpacity());
                     writer.setColor(x, y, c);
@@ -2179,137 +2047,20 @@ public class HelloController {
             }
         }
 
+        //System.out.println(Arrays.toString(graf[1]));
+
+        generateColours();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
+                Color c;
                 if (binary[x][y] == 1) {
-                    if (labels[x][y] == 1) {
-                        Color c = Color.web(colour[0]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 2) {
-                        Color c = Color.web(colour[1]);
-                        writer.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 3) {
-                        Color c = Color.web(colour[2]);
-                        writer.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 4) {
-                        Color c = Color.web(colour[3]);
-                        writer.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 5) {
-                        Color c = Color.web(colour[4]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 6) {
-                        Color c = Color.web(colour[5]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 7) {
-                        Color c = Color.web(colour[6]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 8) {
-                        Color c = Color.web(colour[7]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 9) {
-                        Color c = Color.web(colour[8]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 10) {
-                        Color c = Color.web(colour[9]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 11) {
-                        Color c = Color.web(colour[10]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 12) {
-                        Color c = Color.web(colour[11]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 13) {
-                        Color c = Color.web(colour[12]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 14) {
-                        Color c = Color.web(colour[13]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 15) {
-                        Color c = Color.web(colour[14]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 16) {
-                        Color c = Color.web(colour[15]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 17) {
-                        Color c = Color.web(colour[16]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 18) {
-                        Color c = Color.web(colour[17]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 19) {
-                        Color c = Color.web(colour[18]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 20) {
-                        Color c = Color.web(colour[19]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 21) {
-                        Color c = Color.web(colour[20]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 22) {
-                        Color c = Color.web(colour[21]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 23) {
-                        Color c = Color.web(colour[22]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 24) {
-                        Color c = Color.web(colour[23]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 25) {
-                        Color c = Color.web(colour[24]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 26) {
-                        Color c = Color.web(colour[25]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 27) {
-                        Color c = Color.web(colour[26]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 28) {
-                        Color c = Color.web(colour[27]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 29) {
-                        Color c = Color.web(colour[28]);
-                        writer.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 30) {
-                        Color c = Color.web(colour[29]);
-                        writer.setColor(x, y, c);
-                    }
-                } else if(binary[x][y] == 0)
-                {
-                    Color c = Color.web("0xffffffff");
-                    writer.setColor(x, y, c);
+                    c = Color.web(colour.get(labels[x][y]-1));
                 }
+                else
+                {
+                    c = Color.web("0xffffffff");
+                }
+                writer.setColor(x, y, c);
             }
         }
 
@@ -2377,157 +2128,17 @@ public class HelloController {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
+                Color c;
                 if (binary[x][y] == 1) {
-                    if (labels[x][y] == 1) {
-                        Color c = Color.web(colour[0]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 2) {
-                        Color c = Color.web(colour[1]);
-                        writer2.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 3) {
-                        Color c = Color.web(colour[2]);
-                        writer2.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 4) {
-                        Color c = Color.web(colour[3]);
-                        writer2.setColor(x, y, c);
-
-                    }
-                    if (labels[x][y] == 5) {
-                        Color c = Color.web(colour[4]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 6) {
-                        Color c = Color.web(colour[5]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 7) {
-                        Color c = Color.web(colour[6]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 8) {
-                        Color c = Color.web(colour[7]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 9) {
-                        Color c = Color.web(colour[8]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 10) {
-                        Color c = Color.web(colour[9]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 11) {
-                        Color c = Color.web(colour[10]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 12) {
-                        Color c = Color.web(colour[11]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 13) {
-                        Color c = Color.web(colour[12]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 14) {
-                        Color c = Color.web(colour[13]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 15) {
-                        Color c = Color.web(colour[14]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 16) {
-                        Color c = Color.web(colour[15]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 17) {
-                        Color c = Color.web(colour[18]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 18) {
-                        Color c = Color.web(colour[17]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 19) {
-                        Color c = Color.web(colour[18]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 20) {
-                        Color c = Color.web(colour[19]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 21) {
-                        Color c = Color.web(colour[20]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 22) {
-                        Color c = Color.web(colour[21]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 23) {
-                        Color c = Color.web(colour[22]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 24) {
-                        Color c = Color.web(colour[23]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 25) {
-                        Color c = Color.web(colour[24]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 26) {
-                        Color c = Color.web(colour[25]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 27) {
-                        Color c = Color.web(colour[26]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 28) {
-                        Color c = Color.web(colour[27]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 29) {
-                        Color c = Color.web(colour[28]);
-                        writer2.setColor(x, y, c);
-                    }
-                    if (labels[x][y] == 30) {
-                        Color c = Color.web(colour[29]);
-                        writer2.setColor(x, y, c);
-                    }
-                } else if(binary[x][y] == 0)
-                {
-                    Color c = Color.web("0xffffffff");
-                    writer2.setColor(x, y, c);
+                    c = Color.web(colour.get(labels[x][y]-1));
                 }
+                else
+                {
+                    c = Color.web("0xffffffff");
+                }
+                writer2.setColor(x, y, c);
             }
         }
         imageView3.setImage(dest2);
-
-    }
-
-
-    private Color[] generateColors(int n)
-    {
-        String[] colour = new String[6];
-        colour[0] = "A";
-        colour[1] = "B";
-        colour[2] = "C";
-        colour[3] = "D";
-        colour[4] = "E";
-        colour[5] = "F";
-
-        Color[] cols = new Color[n];
-        for(int i = 0; i < n; i++)
-        {
-
-        }
-        return cols;
     }
 }
