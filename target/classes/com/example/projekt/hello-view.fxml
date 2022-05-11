@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="740.0" prefWidth="1080.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
+<VBox prefHeight="740.0" prefWidth="1080.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
    <children>
       <Label fx:id="titleLabel" alignment="CENTER" prefHeight="39.0" prefWidth="1088.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Two pass connected-component labeling" textFill="WHITE">
          <font>
@@ -32,22 +32,16 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;">
+      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;">
          <children>
-            <StackPane prefHeight="38.0" prefWidth="106.0">
-               <children>
-                  <Button fx:id="exitLabel" mnemonicParsing="false" onAction="#exitGame" prefHeight="28.0" prefWidth="94.0" styleClass="MainButtonStyle" text="Exit">
-                     <font>
-                        <Font name="Calibri" size="15.0" />
-                     </font>
-                  </Button>
-               </children>
-            </StackPane>
             <StackPane prefHeight="38.0" prefWidth="119.0">
                <children>
                   <ComboBox fx:id="languageMenuPLAction" maxHeight="30.0" minHeight="8.0" onAction="#languageMenuAction" prefHeight="30.0" prefWidth="118.0" promptText="Język" />
                   <ComboBox fx:id="languageMenuENAction" maxHeight="30.0" minHeight="8.0" onAction="#languageMenuAction" prefHeight="30.0" prefWidth="118.0" promptText="Language" />
                </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
             </StackPane>
             <Button fx:id="nextLabel" mnemonicParsing="false" onAction="#next" prefHeight="28.0" prefWidth="138.0" styleClass="MainButtonStyle" text="Next iteration">
                <font>
@@ -77,6 +71,15 @@
                   <Font name="Calibri" size="15.0" />
                </font>
             </Button>
+            <StackPane prefHeight="38.0" prefWidth="106.0">
+               <children>
+                  <Button fx:id="exitLabel" mnemonicParsing="false" onAction="#exitGame" prefHeight="28.0" prefWidth="94.0" styleClass="MainButtonStyle" text="Exit">
+                     <font>
+                        <Font name="Calibri" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </StackPane>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
