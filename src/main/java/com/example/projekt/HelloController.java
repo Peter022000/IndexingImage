@@ -23,6 +23,8 @@ import java.util.Random;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 
 public class HelloController {
 
@@ -138,7 +140,7 @@ public class HelloController {
     }
 
     @FXML
-    void chooseDirectory(ActionEvent event) {
+    void chooseDirectory(ActionEvent event) throws ZipException {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(new Stage());
 
@@ -147,8 +149,27 @@ public class HelloController {
         }else{
             defaultDirectory = selectedDirectory.getAbsolutePath();
             directorySet = 1;
+
+            new ZipFile("src/main/resources/test_images.zip").extractAll(defaultDirectory);
         }
     }
+
+    public static void unzip(){
+        String source = "some/compressed/file.zip";
+        String destination = "some/destination/folder";
+        String password = "password";
+
+        try {
+            ZipFile zipFile = new ZipFile(source);
+            if (zipFile.isEncrypted()) {
+                zipFile.setPassword(password);
+            }
+            zipFile.extractAll(destination);
+        } catch (ZipException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     void chooseFile(ActionEvent event) {
@@ -426,7 +447,7 @@ public class HelloController {
 
         binary = new int[width][height];
         labels = new int[width][height];
-        tablicaSklejenRozmiar = 1500;
+        tablicaSklejenRozmiar = 1024;
         tablicaSklejen = new int[2][tablicaSklejenRozmiar];
         tablicaSklejen2 = new int[2][tablicaSklejenRozmiar];
 
@@ -1410,7 +1431,7 @@ public class HelloController {
         binary = new int[width][height];
         labels = new int[width][height];
 
-        grafRozmiar = 1500;
+        grafRozmiar = 1024;
         graf = new int[2][grafRozmiar];
         graf2 = new int[2][grafRozmiar];
 
