@@ -48,12 +48,6 @@ public class HelloController {
     private Button nextLabel;
 
     @FXML
-    private ComboBox<String> imageMenuEN;
-
-    @FXML
-    private ComboBox<String> imageMenuPL;
-
-    @FXML
     private ComboBox<String> languageMenuPLAction;
 
     @FXML
@@ -84,9 +78,6 @@ public class HelloController {
     private Button tablicaSklejenButton;
 
     @FXML
-    private ComboBox<String> imageMenu;
-
-    @FXML
     private Button directoryButton;
 
     @FXML
@@ -108,12 +99,10 @@ public class HelloController {
     private int[][] tablicaSklejen;
     private int[][] tablicaSklejen2;
     private List<String> colour;
-    //private String[] colour;
     private int A, B, C, D;
     private int L;
     private int numerOfLabels;
     private PixelReader reader;
-    private PixelReader reader2;
     private WritableImage dest;
     private WritableImage dest2;
     private PixelWriter writer;
@@ -122,6 +111,9 @@ public class HelloController {
     private String defaultDirectory;
     private String languageName;
     private int directorySet;
+    private int grafRozmiar;
+    private int[][] graf;
+    private int[][] graf2;
 
     @FXML
     void initialize(){
@@ -216,9 +208,6 @@ public class HelloController {
             } else {
                 methodSelected.setText("Equivalence table");
             }
-
-            //imageMenuEN.setVisible(true);
-            //imageMenuPL.setVisible(false);
         }
         else if(languageName.equals("Polski"))
         {
@@ -244,10 +233,6 @@ public class HelloController {
             } else {
                 methodSelected.setText("Tablica sklejeń");
             }
-
-
-            //imageMenuEN.setVisible(false);
-            //imageMenuPL.setVisible(true);
         }
     }
 
@@ -1369,7 +1354,6 @@ public class HelloController {
 
         setTable(table2, tablicaSklejen);
 
-        reader2 = image.getPixelReader();
         dest2 = new WritableImage(width, height);
         writer2 = dest2.getPixelWriter();
 
@@ -1392,10 +1376,6 @@ public class HelloController {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-
-    int grafRozmiar;
-    int[][] graf = new int[grafRozmiar][grafRozmiar];
-    int[][] graf2 = new int[grafRozmiar][grafRozmiar];
 
     int root(int Arr[ ],int i)
     {
@@ -1509,7 +1489,7 @@ public class HelloController {
                         L += 1;
                         labels[x][y] = L;
 
-                        //Modyfikacja tablicy sklejeń start
+                        //Modyfikacja grafu start
                         for (int i = 0; i < grafRozmiar; i++) {
                             if (graf[1][i] == 0) {
                                 numerOfLabels++;
@@ -1518,7 +1498,7 @@ public class HelloController {
                                 break;
                             }
                         }
-                        //Modyfikacja tablicy sklejeń koniec
+                        //Modyfikacja grafu koniec
 
                     } else {
                         // Jedna etykieta w pobliżu start
@@ -2122,7 +2102,6 @@ public class HelloController {
 
         //setTable(table2, graf);
 
-        reader2 = image.getPixelReader();
         dest2 = new WritableImage(width, height);
         writer2 = dest2.getPixelWriter();
 
