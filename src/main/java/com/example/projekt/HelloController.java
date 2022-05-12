@@ -221,7 +221,7 @@ public class HelloController {
             }
             secondStage.setText("Second stage");
             directoryButton.setText("Choose default directory");
-            fileButton.setText("Choose file");
+            fileButton.setText("Load file");
             methodTitle.setText("Selected method");
             tablicaSklejenButton.setText("Equivalence table");
             grafButton.setText("Graph");
@@ -395,42 +395,41 @@ public class HelloController {
     void generateColours(){
         colour = new ArrayList<String>();
 
-        for(int i = 0; i < numerOfLabels; i++)
-        {
-            if(i < 31)
-            {
-                colour.add("0xFF0000ff");
-                colour.add("0x00FF00ff");
-                colour.add("0x0000FFff");
-                colour.add("0xAA0000ff");
-                colour.add("0x0AAAA0ff");
-                colour.add("0xAA00AAff");
-                colour.add("0xBBFF00ff");
-                colour.add("0x00BB00ff");
-                colour.add("0x00AABBff");
-                colour.add("0xABCDEFff");
-                colour.add("0xCC6699ff");
-                colour.add("0xCC9966ff");
-                colour.add("0x66ccb3ff");
-                colour.add("0x55ccb3ff");
-                colour.add("0x667fccff");
-                colour.add("0x6666ccff");
-                colour.add("0x7f66ccff");
-                colour.add("0x9966ccff");
-                colour.add("0xb366ccff");
-                colour.add("0xcc66ccff");
-                colour.add("0xcc6699ff");
-                colour.add("0xcc6666ff");
-                colour.add("0x3366ffff");
-                colour.add("0x426ef0ff");
-                colour.add("0xcc33ffff");
-                colour.add("0xff3366ff");
-                colour.add("0x804000ff");
-                colour.add("0xfa9938ff");
-                colour.add("0x331a00ff");
-                colour.add("0x33ffffff");
-                colour.add("0x33ff99ff");
-            } else {
+        colour.add("0xFF0000ff");
+        colour.add("0x00FF00ff");
+        colour.add("0x0000FFff");
+        colour.add("0xAA0000ff");
+        colour.add("0x0AAAA0ff");
+        colour.add("0xAA00AAff");
+        colour.add("0xBBFF00ff");
+        colour.add("0x00BB00ff");
+        colour.add("0x00AABBff");
+        colour.add("0xABCDEFff");
+        colour.add("0xCC6699ff");
+        colour.add("0xCC9966ff");
+        colour.add("0x66ccb3ff");
+        colour.add("0x55ccb3ff");
+        colour.add("0x667fccff");
+        colour.add("0x6666ccff");
+        colour.add("0x7f66ccff");
+        colour.add("0x9966ccff");
+        colour.add("0xb366ccff");
+        colour.add("0xcc66ccff");
+        colour.add("0xcc6699ff");
+        colour.add("0xcc6666ff");
+        colour.add("0x3366ffff");
+        colour.add("0x426ef0ff");
+        colour.add("0xcc33ffff");
+        colour.add("0xff3366ff");
+        colour.add("0x804000ff");
+        colour.add("0xfa9938ff");
+        colour.add("0x331a00ff");
+        colour.add("0x33ffffff");
+        colour.add("0x33ff99ff");
+
+
+        if(numerOfLabels > 31) {
+            for (int i = 31; i < numerOfLabels; i++) {
                 Random obj = new Random();
                 int rand_num = obj.nextInt(0xffffff + 1);
                 String colorCode = String.format("#%06x", rand_num);
