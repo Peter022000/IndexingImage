@@ -56,7 +56,7 @@
                   <Font name="Calibri" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="fileButton" mnemonicParsing="false" onAction="#chooseFile" prefHeight="28.0" prefWidth="128.0" styleClass="MainButtonStyle" text="Choose file">
+            <Button fx:id="fileButton" mnemonicParsing="false" onAction="#chooseFile" prefHeight="28.0" prefWidth="128.0" styleClass="MainButtonStyle" text="Load file">
                <font>
                   <Font name="Calibri" size="15.0" />
                </font>
