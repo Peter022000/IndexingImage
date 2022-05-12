@@ -174,7 +174,7 @@ public class HelloController {
 
     @FXML
     void chooseFile(ActionEvent event) {
-        imageView1.setImage(null);
+        //imageView1.setImage(null);
         imageView2.setImage(null);
         imageView3.setImage(null);
         FileChooser chooser = new FileChooser();
