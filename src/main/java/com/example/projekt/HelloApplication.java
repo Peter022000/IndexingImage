@@ -18,9 +18,9 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         Image icon = new Image("file:src/main/resources/assets/icon.png");
         stage.getIcons().add(icon);
-        stage.setTitle("Indeksacja");
+        stage.setTitle("Index");
         stage.setScene(scene);
-        stage.setResizable(false);
+//        stage.setResizable(false);
         stage.show();
     }
 

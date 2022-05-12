@@ -13,19 +13,19 @@
 
 <VBox prefHeight="740.0" prefWidth="1080.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
    <children>
-      <Label fx:id="titleLabel" alignment="CENTER" prefHeight="39.0" prefWidth="1088.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Two pass connected-component labeling" textFill="WHITE">
+      <Label fx:id="titleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Two pass connected-component labeling" textFill="WHITE">
          <font>
             <Font name="Calibri" size="26.0" />
          </font>
       </Label>
-      <HBox prefHeight="45.0" prefWidth="1080.0">
+      <HBox prefWidth="1080.0">
          <children>
-            <Label fx:id="methodTitle" alignment="CENTER" prefHeight="39.0" prefWidth="516.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Selected method" textFill="WHITE">
+            <Label fx:id="methodTitle" alignment="CENTER" prefWidth="540.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Selected method" textFill="WHITE">
                <font>
                   <Font name="Calibri" size="26.0" />
                </font>
             </Label>
-            <Label fx:id="methodSelected" alignment="CENTER" prefHeight="39.0" prefWidth="568.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Graph" textFill="WHITE">
+            <Label fx:id="methodSelected" alignment="CENTER" prefWidth="540.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Graph" textFill="WHITE">
                <font>
                   <Font name="Calibri" size="26.0" />
                </font>
