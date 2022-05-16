@@ -92,6 +92,12 @@ public class HelloController {
     @FXML
     private Label methodTitle;
 
+    @FXML
+    private Label fileOptionsTitle;
+
+    @FXML
+    private Label methodsTitle;
+
     private Image image;
     private int stage;
     private int width;
@@ -223,6 +229,8 @@ public class HelloController {
             directoryButton.setText("Choose default directory");
             fileButton.setText("Load file");
             methodTitle.setText("Selected method");
+            fileOptionsTitle.setText("File management");
+            methodsTitle.setText("Methods");
             tablicaSklejenButton.setText("Equivalence table");
             grafButton.setText("Graph");
             if(method == 0) {
@@ -248,6 +256,8 @@ public class HelloController {
             directoryButton.setText("Wybierz folder domyślny");
             fileButton.setText("Wybierz plik");
             methodTitle.setText("Wybrana metoda");
+            fileOptionsTitle.setText("Zarządzanie plikami");
+            methodsTitle.setText("Metody");
             tablicaSklejenButton.setText("Tablica sklejeń");
             grafButton.setText("Graf");
             if(method == 0) {

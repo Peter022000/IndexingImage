@@ -125,7 +125,7 @@
 .combo-box
 {
     -fx-font-family: "Calibri";
-    -fx-font-size: 15;
+    -fx-font-size: 14;
 }
 
 .combo-box-popup .list-view
