@@ -1334,7 +1334,7 @@ public class HelloController {
         List<Integer> labelSort = new ArrayList<>();
 
         for (int i = 0; i < numerOfLabels; i++) {
-            if(!labelSort.contains(tablicaSklejen[1][i]) && tablicaSklejen[1][i] != 0)
+            if(!labelSort.contains(tablicaSklejen[1][i]))
             {
                 labelSort.add(tablicaSklejen[1][i]);
             }
@@ -2084,7 +2084,7 @@ public class HelloController {
         List<Integer> labelSort = new ArrayList<>();
 
         for (int i = 0; i < numerOfLabels; i++) {
-            if(!labelSort.contains(graf[1][i]) && graf[1][i] != 0)
+            if(!labelSort.contains(graf[1][i]))
             {
                 labelSort.add(graf[1][i]);
             }
