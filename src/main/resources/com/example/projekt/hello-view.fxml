@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="680.0" prefWidth="1100.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
+<VBox prefHeight="680.0" prefWidth="1100.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
    <children>
       <Label fx:id="titleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Two pass connected-component labeling" textFill="WHITE">
          <font>
@@ -112,7 +112,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="75.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="325.0" prefWidth="325.0" styleClass="BG_Main">
+            <VBox alignment="CENTER" maxHeight="325.0" maxWidth="325.0" minHeight="325.0" minWidth="325.0" prefHeight="325.0" prefWidth="325.0" styleClass="BG_Main">
                <children>
                   <Label fx:id="titleLabel1" alignment="CENTER" maxWidth="1111.0" minWidth="252.0" prefHeight="28.0" prefWidth="325.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Input image" textFill="WHITE">
                      <font>
@@ -125,7 +125,7 @@
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="325.0" prefWidth="325.0" styleClass="BG_Main">
+            <VBox alignment="CENTER" maxHeight="325.0" maxWidth="325.0" minHeight="325.0" minWidth="325.0" prefHeight="325.0" prefWidth="325.0" styleClass="BG_Main">
                <children>
                   <Label fx:id="titleLabel2" alignment="CENTER" maxWidth="1111.0" minWidth="252.0" prefHeight="28.0" prefWidth="325.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Stage 1" textFill="WHITE">
                      <font>
@@ -135,7 +135,7 @@
                   <ImageView fx:id="imageView2" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="325.0" prefWidth="325.0" styleClass="BG_Main">
+            <VBox alignment="CENTER" maxHeight="325.0" maxWidth="325.0" minHeight="325.0" minWidth="325.0" prefHeight="325.0" prefWidth="325.0" styleClass="BG_Main">
                <children>
                   <Label fx:id="titleLabel3" alignment="CENTER" maxWidth="1111.0" minWidth="252.0" prefHeight="28.0" prefWidth="325.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Stage 2" textFill="WHITE">
                      <font>

@@ -135,6 +135,9 @@ public class HelloController {
 
         languageName = "English";
 
+//        tablicaSklejenRozmiar = 1000000;
+//        grafRozmiar = 1000000;
+
         //TODO: domyślny język zapisany przez kogoś np w pliku pobierac i ifem ustawiać
         languageMenuPLAction.setVisible(false);
         method = 0;
@@ -156,33 +159,12 @@ public class HelloController {
         }else{
             defaultDirectory = selectedDirectory.getAbsolutePath();
             directorySet = 1;
-
-            new ZipFile("src/main/resources/test_images.zip").extractAll(defaultDirectory);
         }
     }
-
-    public static void unzip(){
-        String source = "some/compressed/file.zip";
-        String destination = "some/destination/folder";
-        String password = "password";
-
-        try {
-            ZipFile zipFile = new ZipFile(source);
-            if (zipFile.isEncrypted()) {
-                zipFile.setPassword(password);
-            }
-            zipFile.extractAll(destination);
-        } catch (ZipException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     @FXML
     void chooseFile(ActionEvent event) {
         //imageView1.setImage(null);
-        imageView2.setImage(null);
-        imageView3.setImage(null);
         FileChooser chooser = new FileChooser();
         if(directorySet == 1)
         {
@@ -195,18 +177,20 @@ public class HelloController {
             String imagePath = file.getPath();
             image = new Image(imagePath);
             imageView1.setImage(image);
-        }
 
-        table1.setVisible(false);
-        table1.getColumns().clear();
-        table2.setVisible(false);
-        table2.getColumns().clear();
-        numerOfLabels=0;
-        stage = 0;
-        firstStage.setVisible(false);
-        secondStage.setVisible(false);
-        tablicaSklejenButton.setDisable(false);
-        grafButton.setDisable(false);
+            imageView2.setImage(null);
+            imageView3.setImage(null);
+            table1.setVisible(false);
+            table1.getColumns().clear();
+            table2.setVisible(false);
+            table2.getColumns().clear();
+            numerOfLabels=0;
+            stage = 0;
+            firstStage.setVisible(false);
+            secondStage.setVisible(false);
+            tablicaSklejenButton.setDisable(false);
+            grafButton.setDisable(false);
+        }
     }
 
     @FXML
@@ -270,7 +254,7 @@ public class HelloController {
 
     @FXML
     void tablicaSklejen(ActionEvent event) {
-        if(method != 1) {
+//        if(method != 1) {
             method = 1;
 
             if(languageName.equals("English"))
@@ -284,7 +268,7 @@ public class HelloController {
                 methodSelected.setText("Tablica sklejeń");
             }
 
-            if(stage != 0) {
+            //if(stage != 0) {
                 //imageView1.setImage(null);
                 imageView2.setImage(null);
                 imageView3.setImage(null);
@@ -296,13 +280,13 @@ public class HelloController {
                 secondStage.setVisible(false);
                 numerOfLabels = 0;
                 stage = 0;
-            }
-        }
+            //}
+//        }
     }
 
     @FXML
     void graf(ActionEvent event) {
-        if(method != 0) {
+//        if(method != 0) {
             method = 0;
 
             if(languageName.equals("English"))
@@ -316,7 +300,7 @@ public class HelloController {
                 firstStage.setText("Graf");
             }
 
-            if(stage != 0) {
+            //if(stage != 0) {
                 //imageView1.setImage(null);
                 imageView2.setImage(null);
                 imageView3.setImage(null);
@@ -328,8 +312,8 @@ public class HelloController {
                 firstStage.setVisible(false);
                 secondStage.setVisible(false);
                 stage = 0;
-            }
-        }
+            //}
+//        }
     }
 
     @FXML
@@ -337,8 +321,8 @@ public class HelloController {
         if (stage != -1) {
             if (stage == 0) {
 
-                grafButton.setDisable(true);
-                tablicaSklejenButton.setDisable(true);
+                //grafButton.setDisable(true);
+                //tablicaSklejenButton.setDisable(true);
 
                 if(method == 0)
                 {
@@ -360,8 +344,8 @@ public class HelloController {
                     tablicaSklejenEtapDrugi();
                 }
 
-                grafButton.setDisable(false);
-                tablicaSklejenButton.setDisable(false);
+                //grafButton.setDisable(false);
+                //tablicaSklejenButton.setDisable(false);
 
                 stage = -1;
             }
@@ -455,9 +439,10 @@ public class HelloController {
         width = (int) image.getWidth();
         height = (int) image.getHeight();
 
+        tablicaSklejenRozmiar = (width*height)/2;
+
         binary = new int[width][height];
         labels = new int[width][height];
-        tablicaSklejenRozmiar = 1024;
         tablicaSklejen = new int[2][tablicaSklejenRozmiar];
         tablicaSklejen2 = new int[2][tablicaSklejenRozmiar];
 
@@ -1335,8 +1320,8 @@ public class HelloController {
     void tablicaSklejenEtapDrugi(){
 
         //Sklejenie obiektów start
-        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
-            for (int j = 0; j < tablicaSklejenRozmiar ; j++) {
+        for (int i = 0; i < numerOfLabels; i++) {
+            for (int j = 0; j < numerOfLabels ; j++) {
                 if(tablicaSklejen[0][i] == tablicaSklejen[1][j])
                 {
                     tablicaSklejen[1][j] = tablicaSklejen[1][i];
@@ -1348,7 +1333,7 @@ public class HelloController {
         //Uporządkowanie tablicy sklejeń start
         List<Integer> labelSort = new ArrayList<>();
 
-        for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+        for (int i = 0; i < numerOfLabels; i++) {
             if(!labelSort.contains(tablicaSklejen[1][i]) && tablicaSklejen[1][i] != 0)
             {
                 labelSort.add(tablicaSklejen[1][i]);
@@ -1358,7 +1343,7 @@ public class HelloController {
         int ilosc = labelSort.size();
 
         for(int i = 0; i < ilosc; i++) {
-            for (int j = 0; j < tablicaSklejenRozmiar; j++)
+            for (int j = 0; j < numerOfLabels; j++)
             {
                 if(tablicaSklejen[1][j]==labelSort.get(i))
                 {
@@ -1373,7 +1358,7 @@ public class HelloController {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (binary[x][y] == 1) {
-                    for (int i = 0; i < tablicaSklejenRozmiar; i++) {
+                    for (int i = 0; i < numerOfLabels; i++) {
                         if(tablicaSklejen2[1][i] == labels[x][y]){
                             labels[x][y] = tablicaSklejen[1][i];
                         }
@@ -1438,10 +1423,11 @@ public class HelloController {
         width = (int) image.getWidth();
         height = (int) image.getHeight();
 
+        grafRozmiar = (width*height)/2;
+
         binary = new int[width][height];
         labels = new int[width][height];
 
-        grafRozmiar = 1024;
         graf = new int[2][grafRozmiar];
         graf2 = new int[2][grafRozmiar];
 
@@ -2084,8 +2070,8 @@ public class HelloController {
     void grafEtapDrugi(){
 
         //Sklejenie obiektów start
-        for (int i = 0; i < grafRozmiar; i++) {
-            for (int j = 0; j < grafRozmiar ; j++) {
+        for (int i = 0; i < numerOfLabels; i++) {
+            for (int j = 0; j < numerOfLabels ; j++) {
                 if(graf[0][i] == graf[1][j])
                 {
                     graf[1][j] = graf[1][i];
@@ -2097,7 +2083,7 @@ public class HelloController {
         //Uporządkowanie tablicy sklejeń start
         List<Integer> labelSort = new ArrayList<>();
 
-        for (int i = 0; i < grafRozmiar; i++) {
+        for (int i = 0; i < numerOfLabels; i++) {
             if(!labelSort.contains(graf[1][i]) && graf[1][i] != 0)
             {
                 labelSort.add(graf[1][i]);
@@ -2107,7 +2093,7 @@ public class HelloController {
         int ilosc = labelSort.size();
 
         for(int i = 0; i < ilosc; i++) {
-            for (int j = 0; j < grafRozmiar; j++)
+            for (int j = 0; j < numerOfLabels; j++)
             {
                 if(graf[1][j]==labelSort.get(i))
                 {
@@ -2121,7 +2107,7 @@ public class HelloController {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (binary[x][y] == 1) {
-                    for (int i = 0; i < graf[1].length; i++) {
+                    for (int i = 0; i < numerOfLabels; i++) {
                         if(graf2[1][i] == labels[x][y]){
                             labels[x][y] = graf[1][i];
                         }
