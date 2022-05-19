@@ -98,6 +98,11 @@ public class HelloController {
     @FXML
     private Label methodsTitle;
 
+    @FXML
+    private Button saveFileButton;
+
+
+
     private Image image;
     private int stage;
     private int width;
@@ -142,6 +147,7 @@ public class HelloController {
 
         firstStage.setVisible(false);
         firstStage.setText("Graph");
+        secondStage.setText("Ordered Graph");
         secondStage.setVisible(false);
         grafButton.setStyle("-fx-background-color: #ff9900");
     }
@@ -155,6 +161,11 @@ public class HelloController {
             defaultDirectory = selectedDirectory.getAbsolutePath();
             directorySet = 1;
         }
+    }
+
+    @FXML
+    void saveFileAction(ActionEvent event) {
+
     }
 
     @FXML
@@ -205,15 +216,12 @@ public class HelloController {
                 firstStage.setText("Equivalence table");
                 secondStage.setText("Ordered equivalence table");
             }
-            secondStage.setText("Pass 2");
             directoryButton.setText("Choose default directory");
             fileButton.setText("Load file");
             fileOptionsTitle.setText("File management");
             methodsTitle.setText("Methods");
             tablicaSklejenButton.setText("Equivalence table");
             grafButton.setText("Graph");
-
-
         }
         else if(languageName.equals("Polski"))
         {
@@ -230,7 +238,6 @@ public class HelloController {
                 firstStage.setText("Tablica sklejeń");
                 secondStage.setText("Uporządkowana tablica sklejeń");
             }
-            secondStage.setText("Drugi etap");
             directoryButton.setText("Wybierz folder domyślny");
             fileButton.setText("Wybierz plik");
             fileOptionsTitle.setText("Zarządzanie plikami");
@@ -246,11 +253,15 @@ public class HelloController {
 
         if(languageName.equals("English"))
         {
-            firstStage.setText("First stage");
+            firstStage.setText("Equivalence table");
+            secondStage.setText("Ordered equivalence table");
+
+
         }
         else if(languageName.equals("Polski"))
         {
-            firstStage.setText("Pierwszy etap");
+            firstStage.setText("Tablica sklejeń");
+            secondStage.setText("Uporządkowana tablica sklejeń");
         }
 
         imageView2.setImage(null);

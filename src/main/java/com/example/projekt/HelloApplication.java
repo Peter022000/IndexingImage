@@ -18,7 +18,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         Image icon = new Image("file:src/main/resources/assets/icon.png");
         stage.getIcons().add(icon);
-        stage.setTitle("Index");
+        stage.setTitle("Akademia Nauk Stosowanych w Tarnowie. Twórcy: Piotr Duda, Marcin Król, Kamil Chwistek");
         stage.setScene(scene);
 //        stage.setResizable(false);
         stage.show();
