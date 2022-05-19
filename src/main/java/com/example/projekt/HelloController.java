@@ -12,20 +12,23 @@ import javafx.scene.image.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.zip.ZipException;
+
+import javafx.embed.swing.SwingFXUtils;
+
 
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
-import net.lingala.zip4j.core.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
+import javax.imageio.ImageIO;
 
 public class HelloController {
 
@@ -142,7 +145,7 @@ public class HelloController {
 
         languageMenuPLAction.setVisible(false);
         method = 0;
-        stage = -1;
+        stage = -2;
         directorySet = 0;
 
         firstStage.setVisible(false);
@@ -153,7 +156,7 @@ public class HelloController {
     }
 
     @FXML
-    void chooseDirectory(ActionEvent event) throws ZipException {
+    void chooseDirectory(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(new Stage());
 
@@ -164,8 +167,30 @@ public class HelloController {
     }
 
     @FXML
-    void saveFileAction(ActionEvent event) {
+    void saveFileAction(ActionEvent event) throws IOException {
+        if(stage != -2 && stage != 0) {
+            FileChooser fileChooser = new FileChooser();
 
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            if(directorySet == 1)
+            {
+                String intialDirectory = Paths.get(defaultDirectory).toAbsolutePath().normalize().toString();
+                fileChooser.setInitialDirectory(new File(intialDirectory));
+            }
+
+            File file = fileChooser.showSaveDialog(new Stage());
+
+            if (file != null) {
+                if (stage == 1) {
+                    ImageIO.write(SwingFXUtils.fromFXImage(dest, null), "png", file);
+                } else if (stage == -1) {
+                    ImageIO.write(SwingFXUtils.fromFXImage(dest2, null), "png", file);
+                }
+            }
+        }
     }
 
     @FXML
@@ -273,7 +298,11 @@ public class HelloController {
         firstStage.setVisible(false);
         secondStage.setVisible(false);
         numerOfLabels = 0;
-        stage = 0;
+
+        if(stage != -2){
+            stage = 0;
+        }
+
         grafButton.setStyle("-fx-background-color: #750a0e,\n" +
                 "                                                    linear-gradient(#ec2127, #bc1016);");
         tablicaSklejenButton.setStyle("-fx-background-color: #ff9900");
@@ -303,11 +332,14 @@ public class HelloController {
         numerOfLabels = 0;
         firstStage.setVisible(false);
         secondStage.setVisible(false);
-        stage = 0;
+
+        if(stage != -2){
+            stage = 0;
+        }
 
         grafButton.setStyle("-fx-background-color: #ff9900");
         tablicaSklejenButton.setStyle("-fx-background-color: #750a0e,\n" +
-                    "                                                    linear-gradient(#ec2127, #bc1016);");
+                    "linear-gradient(#ec2127, #bc1016);");
     }
 
     @FXML

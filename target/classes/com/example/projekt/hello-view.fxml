@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="590.0" prefWidth="1000.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
+<VBox prefHeight="590.0" prefWidth="1000.0" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt.HelloController">
    <children>
       <Label fx:id="titleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="Two pass connected-component labeling" textFill="WHITE">
          <font>
@@ -23,8 +23,8 @@
          <children>
             <StackPane prefHeight="78.0" prefWidth="172.0">
                <children>
-                  <ComboBox fx:id="languageMenuPLAction" maxHeight="30.0" minHeight="8.0" onAction="#languageMenuAction" prefHeight="30.0" prefWidth="118.0" promptText="Język" />
-                  <ComboBox fx:id="languageMenuENAction" maxHeight="30.0" minHeight="8.0" onAction="#languageMenuAction" prefHeight="30.0" prefWidth="124.0" promptText="Language" />
+                  <ComboBox fx:id="languageMenuPLAction" maxHeight="30.0" minHeight="8.0" onAction="#languageMenuAction" prefHeight="30.0" prefWidth="90.0" promptText="Język" />
+                  <ComboBox fx:id="languageMenuENAction" maxHeight="30.0" minHeight="8.0" onAction="#languageMenuAction" prefHeight="30.0" prefWidth="90.0" promptText="Language" />
                </children>
                <HBox.margin>
                   <Insets left="10.0" />
@@ -32,7 +32,7 @@
             </StackPane>
             <VBox alignment="CENTER">
                <children>
-                  <Label fx:id="fileOptionsTitle" alignment="CENTER" minWidth="250.0" prefWidth="330.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="File options" textFill="WHITE">
+                  <Label fx:id="fileOptionsTitle" alignment="CENTER" minWidth="250.0" prefHeight="25.0" prefWidth="382.0" style="-fx-background-color: #2D3439; -fx-border-color: #4A5055; -fx-border-insets: 3;" text="File options" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="14.0" />
                      </font>
@@ -45,6 +45,11 @@
                            </font>
                         </Button>
                         <Button fx:id="fileButton" mnemonicParsing="false" onAction="#chooseFile" prefHeight="28.0" prefWidth="106.0" styleClass="MainButtonStyle" text="Load file">
+                           <font>
+                              <Font name="Calibri" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="saveFileButton" mnemonicParsing="false" onAction="#saveFileAction" prefHeight="28.0" prefWidth="106.0" styleClass="MainButtonStyle" text="Save file">
                            <font>
                               <Font name="Calibri" size="12.0" />
                            </font>
@@ -76,7 +81,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="nextLabel" mnemonicParsing="false" onAction="#next" prefHeight="28.0" prefWidth="180.0" styleClass="MainButtonStyle" text="Next step">
+            <Button fx:id="nextLabel" mnemonicParsing="false" onAction="#next" prefHeight="28.0" prefWidth="140.0" styleClass="MainButtonStyle" text="Next step">
                <font>
                   <Font name="Calibri" size="12.0" />
                </font>
