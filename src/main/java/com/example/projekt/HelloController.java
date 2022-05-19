@@ -247,6 +247,7 @@ public class HelloController {
             methodsTitle.setText("Methods");
             tablicaSklejenButton.setText("Equivalence table");
             grafButton.setText("Graph");
+            saveFileButton.setText("Save file");
         }
         else if(languageName.equals("Polski"))
         {
@@ -269,6 +270,7 @@ public class HelloController {
             methodsTitle.setText("Metody");
             tablicaSklejenButton.setText("Tablica sklejeń");
             grafButton.setText("Graf");
+            saveFileButton.setText("Zapisz plik");
         }
     }
 
