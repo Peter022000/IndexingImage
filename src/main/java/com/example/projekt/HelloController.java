@@ -143,6 +143,7 @@ public class HelloController {
         firstStage.setVisible(false);
         firstStage.setText("Graph");
         secondStage.setVisible(false);
+        grafButton.setStyle("-fx-background-color: #ff9900");
     }
 
     @FXML
@@ -193,55 +194,49 @@ public class HelloController {
         {
             exitLabel.setText("Exit");
             titleLabel.setText("Two pass connected-component labeling");
-            nextLabel.setText("Next iteration");
+            nextLabel.setText("Next step");
             titleLabel1.setText("Input image");
-            titleLabel2.setText("Stage 1");
-            titleLabel3.setText("Stage 2");
+            titleLabel2.setText("Pass 1");
+            titleLabel3.setText("Pass 2");
             if(method == 0){
                 firstStage.setText("Graph");
+                secondStage.setText("Ordered graph");
             } else {
-                firstStage.setText("First stage");
+                firstStage.setText("Equivalence table");
+                secondStage.setText("Ordered equivalence table");
             }
-            secondStage.setText("Second stage");
+            secondStage.setText("Pass 2");
             directoryButton.setText("Choose default directory");
             fileButton.setText("Load file");
-            methodTitle.setText("Selected method");
             fileOptionsTitle.setText("File management");
             methodsTitle.setText("Methods");
             tablicaSklejenButton.setText("Equivalence table");
             grafButton.setText("Graph");
-            if(method == 0) {
-                methodSelected.setText("Graph");
-            } else {
-                methodSelected.setText("Equivalence table");
-            }
+
+
         }
         else if(languageName.equals("Polski"))
         {
             exitLabel.setText("Wyjdź");
             titleLabel.setText("Indeksacja Dwuprzebiegowa");
-            nextLabel.setText("Następna iteracja");
+            nextLabel.setText("Następny krok");
             titleLabel1.setText("Obraz wejściowy");
             titleLabel2.setText("Etap 1");
             titleLabel3.setText("Etap 2");
             if(method == 0){
                 firstStage.setText("Graf");
+                secondStage.setText("Uporządkowany graf");
             } else {
-                firstStage.setText("Pierwszy etap");
+                firstStage.setText("Tablica sklejeń");
+                secondStage.setText("Uporządkowana tablica sklejeń");
             }
             secondStage.setText("Drugi etap");
             directoryButton.setText("Wybierz folder domyślny");
             fileButton.setText("Wybierz plik");
-            methodTitle.setText("Wybrana metoda");
             fileOptionsTitle.setText("Zarządzanie plikami");
             methodsTitle.setText("Metody");
             tablicaSklejenButton.setText("Tablica sklejeń");
             grafButton.setText("Graf");
-            if(method == 0) {
-                methodSelected.setText("Graf");
-            } else {
-                methodSelected.setText("Tablica sklejeń");
-            }
         }
     }
 
@@ -251,13 +246,11 @@ public class HelloController {
 
         if(languageName.equals("English"))
         {
-            methodSelected.setText("Equivalence table");
             firstStage.setText("First stage");
         }
         else if(languageName.equals("Polski"))
         {
             firstStage.setText("Pierwszy etap");
-            methodSelected.setText("Tablica sklejeń");
         }
 
         imageView2.setImage(null);
@@ -270,6 +263,9 @@ public class HelloController {
         secondStage.setVisible(false);
         numerOfLabels = 0;
         stage = 0;
+        grafButton.setStyle("-fx-background-color: #750a0e,\n" +
+                "                                                    linear-gradient(#ec2127, #bc1016);");
+        tablicaSklejenButton.setStyle("-fx-background-color: #ff9900");
     }
 
     @FXML
@@ -278,13 +274,13 @@ public class HelloController {
 
         if(languageName.equals("English"))
         {
-            methodSelected.setText("Graph");
             firstStage.setText("Graph");
+            secondStage.setText("Ordered graph");
         }
         else if(languageName.equals("Polski"))
         {
-            methodSelected.setText("Graf");
             firstStage.setText("Graf");
+            secondStage.setText("Uporządkowany graf");
         }
 
         imageView2.setImage(null);
@@ -297,6 +293,10 @@ public class HelloController {
         firstStage.setVisible(false);
         secondStage.setVisible(false);
         stage = 0;
+
+        grafButton.setStyle("-fx-background-color: #ff9900");
+        tablicaSklejenButton.setStyle("-fx-background-color: #750a0e,\n" +
+                    "                                                    linear-gradient(#ec2127, #bc1016);");
     }
 
     @FXML
@@ -318,6 +318,7 @@ public class HelloController {
                 if(method == 0)
                 {
                     grafEtapDrugi();
+                    secondStage.setVisible(true);
                 }
                 else {
                     secondStage.setVisible(true);
@@ -2094,7 +2095,7 @@ public class HelloController {
         }
         //Podmienienie etykiet koniec
 
-        //setTable(table2, graf);
+        setTable(table2, graf);
 
         dest2 = new WritableImage(width, height);
         writer2 = dest2.getPixelWriter();

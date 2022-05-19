@@ -94,8 +94,14 @@
 }
 
 .table-view .virtual-flow .scroll-bar:vertical .thumb{
-    -fx-background-color: linear-gradient(to bottom, #eb141c, #ed2c32);
+    -fx-background-color: transparent;
 }
+
+.table-view .virtual-flow .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-visibility: false;
+}
+
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-color: linear-gradient(to bottom, #eb141c, #ed2c32);
 }
@@ -106,7 +112,6 @@
 }
 
 .table-row-cell:selected {
-   -fx-background-color: rgba(255, 77, 77,0.4);
    -fx-text-background-color: white;
 }
 .table-view .column-header .label{
@@ -125,7 +130,7 @@
 .combo-box
 {
     -fx-font-family: "Calibri";
-    -fx-font-size: 14;
+    -fx-font-size: 12;
 }
 
 .combo-box-popup .list-view
