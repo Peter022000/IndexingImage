@@ -135,10 +135,6 @@ public class HelloController {
 
         languageName = "English";
 
-//        tablicaSklejenRozmiar = 1000000;
-//        grafRozmiar = 1000000;
-
-        //TODO: domyślny język zapisany przez kogoś np w pliku pobierac i ifem ustawiać
         languageMenuPLAction.setVisible(false);
         method = 0;
         stage = -1;
@@ -154,9 +150,7 @@ public class HelloController {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(new Stage());
 
-        if(selectedDirectory == null){
-            //No Directory selected
-        }else{
+        if(selectedDirectory != null){
             defaultDirectory = selectedDirectory.getAbsolutePath();
             directorySet = 1;
         }
@@ -164,7 +158,6 @@ public class HelloController {
 
     @FXML
     void chooseFile(ActionEvent event) {
-        //imageView1.setImage(null);
         FileChooser chooser = new FileChooser();
         if(directorySet == 1)
         {
@@ -254,75 +247,62 @@ public class HelloController {
 
     @FXML
     void tablicaSklejen(ActionEvent event) {
-//        if(method != 1) {
-            method = 1;
+        method = 1;
 
-            if(languageName.equals("English"))
-            {
-                methodSelected.setText("Equivalence table");
-                firstStage.setText("First stage");
-            }
-            else if(languageName.equals("Polski"))
-            {
-                firstStage.setText("Pierwszy etap");
-                methodSelected.setText("Tablica sklejeń");
-            }
+        if(languageName.equals("English"))
+        {
+            methodSelected.setText("Equivalence table");
+            firstStage.setText("First stage");
+        }
+        else if(languageName.equals("Polski"))
+        {
+            firstStage.setText("Pierwszy etap");
+            methodSelected.setText("Tablica sklejeń");
+        }
 
-            //if(stage != 0) {
-                //imageView1.setImage(null);
-                imageView2.setImage(null);
-                imageView3.setImage(null);
-                table1.setVisible(false);
-                table1.getColumns().clear();
-                table2.setVisible(false);
-                table2.getColumns().clear();
-                firstStage.setVisible(false);
-                secondStage.setVisible(false);
-                numerOfLabels = 0;
-                stage = 0;
-            //}
-//        }
+        imageView2.setImage(null);
+        imageView3.setImage(null);
+        table1.setVisible(false);
+        table1.getColumns().clear();
+        table2.setVisible(false);
+        table2.getColumns().clear();
+        firstStage.setVisible(false);
+        secondStage.setVisible(false);
+        numerOfLabels = 0;
+        stage = 0;
     }
 
     @FXML
     void graf(ActionEvent event) {
-//        if(method != 0) {
-            method = 0;
+        method = 0;
 
-            if(languageName.equals("English"))
-            {
-                methodSelected.setText("Graph");
-                firstStage.setText("Graph");
-            }
-            else if(languageName.equals("Polski"))
-            {
-                methodSelected.setText("Graf");
-                firstStage.setText("Graf");
-            }
+        if(languageName.equals("English"))
+        {
+            methodSelected.setText("Graph");
+            firstStage.setText("Graph");
+        }
+        else if(languageName.equals("Polski"))
+        {
+            methodSelected.setText("Graf");
+            firstStage.setText("Graf");
+        }
 
-            //if(stage != 0) {
-                //imageView1.setImage(null);
-                imageView2.setImage(null);
-                imageView3.setImage(null);
-                table1.setVisible(false);
-                table1.getColumns().clear();
-                table2.setVisible(false);
-                table2.getColumns().clear();
-                numerOfLabels = 0;
-                firstStage.setVisible(false);
-                secondStage.setVisible(false);
-                stage = 0;
-            //}
-//        }
+        imageView2.setImage(null);
+        imageView3.setImage(null);
+        table1.setVisible(false);
+        table1.getColumns().clear();
+        table2.setVisible(false);
+        table2.getColumns().clear();
+        numerOfLabels = 0;
+        firstStage.setVisible(false);
+        secondStage.setVisible(false);
+        stage = 0;
     }
 
     @FXML
     void next(ActionEvent event) {
         if (stage != -1) {
             if (stage == 0) {
-
-                //grafButton.setDisable(true);
-                //tablicaSklejenButton.setDisable(true);
 
                 if(method == 0)
                 {
@@ -343,9 +323,6 @@ public class HelloController {
                     secondStage.setVisible(true);
                     tablicaSklejenEtapDrugi();
                 }
-
-                //grafButton.setDisable(false);
-                //tablicaSklejenButton.setDisable(false);
 
                 stage = -1;
             }
