@@ -306,7 +306,7 @@ public class HelloController {
         }
 
         grafButton.setStyle("-fx-background-color: #750a0e,\n" +
-                "                                                    linear-gradient(#ec2127, #bc1016);");
+                "linear-gradient(#ec2127, #bc1016);");
         tablicaSklejenButton.setStyle("-fx-background-color: #ff9900");
     }
 
