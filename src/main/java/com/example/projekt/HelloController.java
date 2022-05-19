@@ -20,10 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.zip.ZipException;
 
 import javafx.embed.swing.SwingFXUtils;
-
 
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
