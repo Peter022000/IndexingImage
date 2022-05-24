@@ -23,9 +23,6 @@ import java.util.Random;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
-import net.lingala.zip4j.core.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
-
 public class HelloController {
 
     @FXML
@@ -140,7 +137,7 @@ public class HelloController {
     }
 
     @FXML
-    void chooseDirectory(ActionEvent event) throws ZipException {
+    void chooseDirectory(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(new Stage());
 
@@ -149,27 +146,8 @@ public class HelloController {
         }else{
             defaultDirectory = selectedDirectory.getAbsolutePath();
             directorySet = 1;
-
-            new ZipFile("src/main/resources/test_images.zip").extractAll(defaultDirectory);
         }
     }
-
-    public static void unzip(){
-        String source = "some/compressed/file.zip";
-        String destination = "some/destination/folder";
-        String password = "password";
-
-        try {
-            ZipFile zipFile = new ZipFile(source);
-            if (zipFile.isEncrypted()) {
-                zipFile.setPassword(password);
-            }
-            zipFile.extractAll(destination);
-        } catch (ZipException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     @FXML
     void chooseFile(ActionEvent event) {
